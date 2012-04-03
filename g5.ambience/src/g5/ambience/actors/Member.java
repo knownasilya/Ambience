@@ -6,7 +6,7 @@ package g5.ambience.actors;
 import java.util.Date;
 
 /**
- * @author ilya
+ * @author Ilya Radchenko
  *
  */
 public class Member extends User {
@@ -20,7 +20,6 @@ public class Member extends User {
 	private int cc_number;
 	private int cc_security;
 	private Date cc_expiration;
-	
 	
 	/**
 	 * @return the profile_image
@@ -38,7 +37,7 @@ public class Member extends User {
 	 * @return the street
 	 */
 	public String get_street() {
-		return street;
+		return "index";
 	}
 	/**
 	 * @param street the street to set
