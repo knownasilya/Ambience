@@ -5,15 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Login</title>
+<title>Insert title here</title>
 </head>
 <body>
 <f:view>
-	<h:form>
-		<h:inputText value="#{member.username}"></h:inputText>
-		<h:inputSecret value="#{member.password}"></h:inputSecret>
-		<h:commandButton action="#{member.update}" value="Login"></h:commandButton>
-	</h:form>
+	You have successfully logged in as: 
+	<h:outputText value="#{member._username}"></h:outputText>
 </f:view>
 </body>
 </html>

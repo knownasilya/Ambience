@@ -22,6 +22,26 @@ public class Member extends User {
 	private Date cc_expiration;
 	
 	/**
+	 * @return the username
+	 */
+	public String get_username(){
+		return super.getUsername();
+	}
+	
+	public void set_username(String username){
+		super.setUsername(username);
+	}
+	
+	public String get_password(){
+		return super.getPassword();
+	}
+	
+	public void set_password(String password){
+		super.setPassword(password);
+	}
+	
+	
+	/**
 	 * @return the profile_image
 	 */
 	public String get_profile_image() {
@@ -37,7 +57,7 @@ public class Member extends User {
 	 * @return the street
 	 */
 	public String get_street() {
-		return "index";
+		return street;
 	}
 	/**
 	 * @param street the street to set
@@ -130,5 +150,13 @@ public class Member extends User {
 		this.cc_expiration = cc_expiration;
 	}
 	
+	public String update(){
+		if(this.get_username() == "admin" && this.get_password() == "password"){
+			return "success";
+		}
+		else {
+			return "failure";
+		}
+	}
 
 }

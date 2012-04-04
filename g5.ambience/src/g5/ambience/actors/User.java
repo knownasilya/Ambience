@@ -18,6 +18,7 @@ public class User {
 	
 	
 	
+
 	/**
 	 * @return the username
 	 */
@@ -72,5 +73,12 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}	
+	
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
 
 }
