@@ -1,7 +1,8 @@
 /**
  * 
  */
-package g5.ambience.actors;
+package g5.ambience.user.member.model;
+import g5.ambience.user.User;
 
 import java.util.Date;
 
@@ -20,24 +21,26 @@ public class Member extends User {
 	private int cc_number;
 	private int cc_security;
 	private Date cc_expiration;
+	private String output;
+	private int login_attempts; 
 	
 	/**
 	 * @return the username
 	 */
 	public String get_username(){
-		return super.getUsername();
+		return super.get_username();
 	}
 	
 	public void set_username(String username){
-		super.setUsername(username);
+		super.set_username(username);
 	}
 	
 	public String get_password(){
-		return super.getPassword();
+		return super.get_password();
 	}
 	
 	public void set_password(String password){
-		super.setPassword(password);
+		super.set_password(password);
 	}
 	
 	
@@ -150,13 +153,44 @@ public class Member extends User {
 		this.cc_expiration = cc_expiration;
 	}
 	
+	public String get_output() {
+		return output;
+	}
+
+	public void set_output(String output) {
+		this.output += output;
+	}
+	
+	public void reset_login_attempts(){
+		this.login_attempts = 0;
+	}
+	
+	/**
+	 * @return the login_attempts
+	 */
+	public int get_login_attempts() {
+		return login_attempts;
+	}
+
+	/**
+	 * @param login_attempts the login_attempts to set
+	 */
+	public void increment_login_attempts(int login_attempts) {
+		this.login_attempts += login_attempts;
+	}
+
 	public String update(){
-		if(this.get_username() == "admin" && this.get_password() == "password"){
+		if(get_username().equals("admin") && get_password().equals("password")){
+			reset_login_attempts();
+			set_output("Success");
 			return "success";
 		}
 		else {
+			increment_login_attempts(1);
+			set_output("Try Again");			
 			return "failure";
 		}
 	}
 
+	
 }

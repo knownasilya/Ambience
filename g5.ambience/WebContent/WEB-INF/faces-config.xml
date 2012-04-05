@@ -7,12 +7,12 @@
     version="2.0">
 	<managed-bean>
 		<managed-bean-name>user</managed-bean-name>
-		<managed-bean-class>g5.ambience.actors.User</managed-bean-class>
+		<managed-bean-class>g5.ambience.user.User</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>member</managed-bean-name>
-		<managed-bean-class>g5.ambience.actors.Member</managed-bean-class>
+		<managed-bean-class>g5.ambience.user.member.model.Member</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<navigation-rule>
