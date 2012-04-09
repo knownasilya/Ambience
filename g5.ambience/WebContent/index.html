@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Login</title>
+		<h:outputStylesheet library="css" name="style.css"/>
+		<f:loadBundle basename="g5.ambience.user.member.member_messages" var="msg"/>
+	</h:head>
+	<h:body>
+		<h:form>
+			<h:outputLabel value="#{msg.username}" for="username"></h:outputLabel>
+			<h:inputText value="#{member._username}" id="username"></h:inputText>
+			<h:outputLabel value="#{msg.password}" for="password"></h:outputLabel>
+			<h:inputSecret value="#{member._password}" id="password"></h:inputSecret>
+			<h:commandButton action="#{member.login}" value="#{msg.login}"></h:commandButton><br/>
+			You have <h:outputText value="#{member._login_attempts}"></h:outputText> login attempts left.
+			<h:outputText id="username_output" value="#{member._username}"></h:outputText>
+		</h:form>
+	</h:body>
+</html>

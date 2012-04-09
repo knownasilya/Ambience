@@ -2,12 +2,16 @@
  * 
  */
 package g5.ambience.user;
+import g5.ambience.user.auth.Authenticator;
 
 /**
  * @author ilya
  *
  */
+@SuppressWarnings("unused")
 public class User {
+
+
 
 
 	private String username;
@@ -15,8 +19,18 @@ public class User {
 	private String last_name;
 	private String email;
 	private String password;
+	private int available_login_attempts;
+	private int default_login_attempts = 5;
+	private Boolean login_blocked;
 	
-	
+	/**
+	 * @param login_attempts
+	 */
+	public User() {
+		super();
+		this.available_login_attempts = default_login_attempts;
+		this.login_blocked = false;
+	}
 	
 
 	/**
@@ -79,6 +93,50 @@ public class User {
 	 */
 	public String get_password() {
 		return password;
+	}
+	
+	public void reset_login_attempts(){
+		this.available_login_attempts = default_login_attempts;
+	}
+	
+	/**
+	 * @return the login_attempts
+	 */
+	public int get_login_attempts() {
+		return available_login_attempts;
+	}
+
+	/**
+	 * @param login_attempts the login_attempts to set
+	 */
+	public void dec_login_attempts() {
+		this.available_login_attempts -= 1;
+	}
+	
+	public void block_login(){
+		if(get_login_attempts() <= 0){
+			this.login_blocked = true;
+		}
+		else {
+			this.login_blocked = false;
+		}
+	}
+	
+	public String login(){
+		if(login_blocked){
+			return "login-locked-out";
+		} 
+		else {
+			if(get_username().equals("admin") && get_password().equals("password")){
+				reset_login_attempts();
+				return "success";
+			}
+			else {
+				dec_login_attempts();
+				block_login();
+				return "failure";
+			}
+		}
 	}
 
 }
