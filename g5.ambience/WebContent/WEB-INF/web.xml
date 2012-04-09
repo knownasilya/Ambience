@@ -63,6 +63,11 @@
 	    <param-value>true</param-value>
 	  </context-param>
 	  
+	 <context-param>
+  		<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+ 		<param-value>.html</param-value>
+ 	</context-param>
+ 
 	  <listener>
 	    <listener-class>org.apache.myfaces.webapp.StartupServletContextListener</listener-class>
 	  </listener>
