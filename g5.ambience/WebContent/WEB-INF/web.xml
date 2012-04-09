@@ -4,7 +4,6 @@
 	  
 	  <welcome-file-list>
 	    <welcome-file>index.html</welcome-file>
-	    <welcome-file>/faces/index.html</welcome-file>
 	  </welcome-file-list>
 	  
 	  <context-param>
@@ -63,10 +62,10 @@
 	    <param-value>true</param-value>
 	  </context-param>
 	  
-	 <context-param>
-  		<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
- 		<param-value>.xhtml</param-value>
- 	</context-param>
+		<context-param>
+		    <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+		    <param-value>.html</param-value>
+		</context-param>
  
 	  <listener>
 	    <listener-class>org.apache.myfaces.webapp.StartupServletContextListener</listener-class>
@@ -88,6 +87,6 @@
 	  <!-- Map these files with JSF -->
 	  <servlet-mapping>
 	    <servlet-name>Faces Servlet</servlet-name>
-	    <url-pattern>*.xhtml</url-pattern>
+	    <url-pattern>/faces/*</url-pattern>
 	  </servlet-mapping>
 </web-app>
