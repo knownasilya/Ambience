@@ -62,8 +62,10 @@
 	    <param-name>org.apache.myfaces.AUTO_SCROLL</param-name>
 	    <param-value>true</param-value>
 
-           <!-- Added by recommendation of @exabrial from stackoverflow.com-->
-	  </context-param>
+          </context-param>
+
+          <!-- Added by recommendation of @exabrial from stackoverflow.com-->
+
            <context-param>   
               <param-name>javax.faces.DEFAULT_SUFFIX</param-name>   
               <param-value>.html</param-value>  
