@@ -16,12 +16,21 @@
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<navigation-rule>
+<<<<<<< HEAD
 		<display-name>index.xhtml</display-name>
 		<from-view-id>/index.xhtml</from-view-id>
 		<navigation-case>
 			<from-action>#{member.login}</from-action>
 			<from-outcome>success</from-outcome>
 			<to-view-id>/success.xhtml</to-view-id>
+=======
+		<display-name>index</display-name>
+		<from-view-id>/index.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/success.jsp</to-view-id>
+			<redirect />
+>>>>>>> refs/heads/master
 		</navigation-case>
 	</navigation-rule>
 

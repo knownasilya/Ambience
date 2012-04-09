@@ -12,7 +12,6 @@ import java.util.Date;
  */
 public class Member extends User {
 	
-
 	private String profile_image;
 	private String street;
 	private String opt_address;
@@ -22,17 +21,8 @@ public class Member extends User {
 	private int cc_number;
 	private int cc_security;
 	private Date cc_expiration;
-
-	
-	
-	/**
-	 * @param profile_image
-	 * @param login_attempts
-	 */
-	public Member() {
-		super();
-		this.profile_image = "theme/images/profile/default/default.png";
-	}
+	private String output;
+	private int login_attempts; 
 	
 	/**
 	 * @return the username
@@ -162,5 +152,45 @@ public class Member extends User {
 	public void set_cc_expiration(Date cc_expiration) {
 		this.cc_expiration = cc_expiration;
 	}
-		
+	
+	public String get_output() {
+		return output;
+	}
+
+	public void set_output(String output) {
+		this.output += output;
+	}
+	
+	public void reset_login_attempts(){
+		this.login_attempts = 0;
+	}
+	
+	/**
+	 * @return the login_attempts
+	 */
+	public int get_login_attempts() {
+		return login_attempts;
+	}
+
+	/**
+	 * @param login_attempts the login_attempts to set
+	 */
+	public void increment_login_attempts(int login_attempts) {
+		this.login_attempts += login_attempts;
+	}
+
+	public String update(){
+		if(get_username().equals("admin") && get_password().equals("password")){
+			reset_login_attempts();
+			set_output("Success");
+			return "success";
+		}
+		else {
+			increment_login_attempts(1);
+			set_output("Try Again");			
+			return "failure";
+		}
+	}
+
+	
 }
