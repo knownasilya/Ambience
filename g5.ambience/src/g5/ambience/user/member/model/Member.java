@@ -179,7 +179,7 @@ public class Member extends User {
 		this.login_attempts += login_attempts;
 	}
 
-	public String update(){
+	public String login(){
 		if(get_username().equals("admin") && get_password().equals("password")){
 			reset_login_attempts();
 			set_output("Success");
