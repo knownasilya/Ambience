@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13340136459260" configfile="/g5.ambience/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="122" y="178" id="pf13340136750731" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf13340136750732" path="/index.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="index" x="338" y="178" id="pf13340136750733" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf13340136750732" path="/success.xhtml"/>
-  <links id="pf13340136750732" target="pf13340136750733" source="pf13340136750731" outcome="success" fromaction="#{member.login}"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="122" y="178" id="pf13340136750731" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf13340154199024 pf13340192536056" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="success.xhtml" x="336" y="178" width="85" height="75" id="pf13340154199035" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf13340154199024" path="/success.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="failure.xhtml" x="336" y="288" width="85" height="73" id="pf13340192536067" inlinks="pf13340192536056" path="/failure.xhtml"/>
+  <links id="pf13340154199024" target="pf13340154199035" source="pf13340136750731" outcome="success" fromaction="#{member.login}"/>
+  <links id="pf13340192536056" target="pf13340192536067" source="pf13340136750731" outcome="failure" fromaction="#{member.login}"/>
 </pageflow:Pageflow>

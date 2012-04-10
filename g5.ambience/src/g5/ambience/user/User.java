@@ -9,18 +9,32 @@ package g5.ambience.user;
  */
 public class User {
 
-
 	private String username;
 	private String first_name;
 	private String last_name;
 	private String email;
 	private String password;
+	private int default_login_attempts = 5;
+	private int available_login_attempts;
 	
 	
-	
+	/**
+	 * The default User constructor takes no parameters but only initializes the available
+	 * login attempts that every user has by default. The default is stored in the
+	 * default_login_attempts and is usually 5.
+	 */
+	public User(){
+		available_login_attempts = default_login_attempts;
+	}
 
 	/**
-	 * @return the username
+	 * A simple getter method for the username of a {@link User} which can be either 
+	 * a {@link Member} or {@link Admin}. This getter returns a unique String object. 
+	 * 
+	 * @return username	a case-sensitive {@url String} which is unique across the whole system.
+	 * @see Member
+	 * @see Admin
+	 * @see User
 	 */
 	public String get_username() {
 		return username;
@@ -80,5 +94,42 @@ public class User {
 	public String get_password() {
 		return password;
 	}
+	
+	public void reset_login_attempts(){
+		this.available_login_attempts = default_login_attempts;
+	}
+	
+	/**
+	 * @return the login_attempts
+	 */
+	public int get_login_attempts() {
+		return available_login_attempts;
+	}
+
+	/**
+	 * @param login_attempts the login_attempts to set
+	 */
+	public void dec_login_attempts() {
+		this.available_login_attempts -= 1;
+	}
+
+	/**
+	 * A simple login function for testing functionality. This function can be used by
+	 * the {@link Memeber} or {@link Admin} classes and currently only allows the following
+	 * user/password: Admin/password
+	 * 
+	 * @return success or failure	the return value of this function tells the system which page to render.
+	 */
+	public String login(){
+		if(get_username().equals("admin") && get_password().equals("password")){
+			reset_login_attempts();
+			return "success";
+		}
+		else {
+			dec_login_attempts();			
+			return "failure";
+		}
+	}
+
 
 }
