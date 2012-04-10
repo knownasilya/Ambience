@@ -7,12 +7,12 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
 		<title>Login</title>
 		<h:outputStylesheet library="css" name="style.css" type="text/css"/>
-		<f:loadBundle basename="g5.ambience.user.member.member_messages" var="msg"/>
+		<f:loadBundle basename="g5.ambience.user.messages" var="msg"/>
 	</h:head>
 	<h:body>
 		<f:view>
 			You have successfully logged in as: 
-			<h:outputText value="#{member._username}"></h:outputText>
+			<h:outputText value="#{user._username}"></h:outputText>
 		</f:view>
 	</h:body>
 </html>

@@ -42,6 +42,7 @@ public class Member extends User {
 	}*/
 	
 	
+	
 	/**
 	 * @return the profile_image
 	 */
