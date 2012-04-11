@@ -30,7 +30,7 @@
   <display-name>index.xhtml</display-name>
   <from-view-id>/index.xhtml</from-view-id>
   <navigation-case>
-   <from-action>#{member.login}</from-action>
+   <from-action>#{user.login}</from-action>
    <from-outcome>failure</from-outcome>
    <to-view-id>/failure.xhtml</to-view-id>
   </navigation-case>

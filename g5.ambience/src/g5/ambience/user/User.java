@@ -3,12 +3,23 @@
  */
 package g5.ambience.user;
 
+
+import java.io.Serializable;
+
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Index;
+
 /**
  * @author ilya
  *
  */
-public class User {
+@DynamicUpdate
+public class User implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6072515475403687595L;
 	private String username;
 	private String first_name;
 	private String last_name;
@@ -22,7 +33,7 @@ public class User {
 	 * The default User constructor takes no parameters but only initializes the available
 	 * login attempts that every user has by default. The default is stored in the
 	 * default_login_attempts and is usually 5.
-	 */
+	 */	
 	public User(){
 		available_login_attempts = default_login_attempts;
 	}
@@ -36,6 +47,7 @@ public class User {
 	 * @see Admin
 	 * @see User
 	 */
+	@Index(name = "username")
 	public String get_username() {
 		return username;
 	}
