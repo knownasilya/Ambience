@@ -11,6 +11,10 @@ import g5.ambience.user.User;
  */
 public class Admin extends User {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4189091368711977599L;
 	private boolean is_admin;
 
 	/**

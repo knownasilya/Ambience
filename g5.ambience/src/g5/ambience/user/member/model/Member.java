@@ -12,6 +12,10 @@ import java.util.Date;
  */
 public class Member extends User {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9191451375979026723L;
 	private String profile_image;
 	private String street;
 	private String opt_address;
