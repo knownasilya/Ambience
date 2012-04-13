@@ -3,30 +3,40 @@
  */
 package g5.ambience.user;
 
-
 import java.io.Serializable;
 
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.Index;
+import javax.persistence.*;
+
+
 
 /**
  * @author ilya
  *
  */
-@DynamicUpdate
+@Entity
+@Table(name="User")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="is_admin")
+@DiscriminatorValue("false")
 public class User implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6072515475403687595L;
+	@Id
 	private String username;
 	private String first_name;
 	private String last_name;
 	private String email;
+	@Column(name="password_hash")
 	private String password;
+	private boolean is_admin;
+	@Transient
 	private int default_login_attempts = 5;
+	@Transient
 	private int available_login_attempts;
+	
 	
 	
 	/**
@@ -47,7 +57,6 @@ public class User implements Serializable {
 	 * @see Admin
 	 * @see User
 	 */
-	@Index(name = "username")
 	public String get_username() {
 		return username;
 	}
@@ -107,6 +116,20 @@ public class User implements Serializable {
 		return password;
 	}
 	
+	/**
+	 * @return the is_admin
+	 */
+	public boolean get_is_admin() {
+		return is_admin;
+	}
+
+	/**
+	 * @param is_admin the is_admin to set
+	 */
+	public void set_is_admin(boolean is_admin) {
+		this.is_admin = is_admin;
+	}
+
 	public void reset_login_attempts(){
 		this.available_login_attempts = default_login_attempts;
 	}
@@ -132,7 +155,8 @@ public class User implements Serializable {
 	 * 
 	 * @return success or failure	the return value of this function tells the system which page to render.
 	 */
-	public String login(){
+	public String login() {
+        
 		if(get_username().equals("admin") && get_password().equals("password")){
 			reset_login_attempts();
 			return "success";
@@ -142,6 +166,4 @@ public class User implements Serializable {
 			return "failure";
 		}
 	}
-
-
 }

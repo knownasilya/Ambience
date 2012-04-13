@@ -6,10 +6,14 @@ import g5.ambience.user.User;
 
 import java.util.Date;
 
+import javax.persistence.*;
+
 /**
  * @author Ilya Radchenko
  *
  */
+@Entity
+@DiscriminatorValue("false")
 public class Member extends User {
 	
 	/**
@@ -18,7 +22,7 @@ public class Member extends User {
 	private static final long serialVersionUID = -9191451375979026723L;
 	private String profile_image;
 	private String street;
-	private String opt_address;
+	private String street_opt;
 	private String city;
 	private String state;
 	private int zipcode;
@@ -72,16 +76,16 @@ public class Member extends User {
 		this.street = street;
 	}
 	/**
-	 * @return the opt_address
+	 * @return the street_opt
 	 */
-	public String get_opt_address() {
-		return opt_address;
+	public String get_street_opt() {
+		return street_opt;
 	}
 	/**
 	 * @param opt_address the opt_address to set
 	 */
-	public void set_opt_address(String opt_address) {
-		this.opt_address = opt_address;
+	public void set_street_opt(String street_opt) {
+		this.street_opt = street_opt;
 	}
 	/**
 	 * @return the city

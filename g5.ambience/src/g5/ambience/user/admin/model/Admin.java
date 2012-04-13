@@ -3,12 +3,16 @@
  */
 package g5.ambience.user.admin.model;
 
+import javax.persistence.*;
+
 import g5.ambience.user.User;
 
 /**
  * @author ilya
  *
  */
+@Entity
+@DiscriminatorValue("true")
 public class Admin extends User {
 	
 	/**
