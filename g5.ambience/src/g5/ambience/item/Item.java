@@ -1,8 +1,11 @@
 package g5.ambience.item;
 
+import g5.ambience.user.User;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 
 /**
@@ -17,7 +20,7 @@ public class Item implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.TABLE)
 	@Column(name="item_id", unique=true, nullable=false)
-	private int item_id;
+	private int itemId;
 
 	@Column(length=45)
 	private String developer;
@@ -26,29 +29,29 @@ public class Item implements Serializable {
 	private String director;
 
 	@Column(name="esrb_rating", length=10)
-	private String esrb_rating;
+	private String esrbRating;
 
 	@Column(nullable=false, length=45)
 	private String genre;
 
 	@Column(name="image_url", nullable=false, length=200)
-	private String image_url;
+	private String imageUrl;
 
 	@Column(name="is_out", nullable=false)
-	private byte is_out;
+	private byte isOut;
 
 	@Column(name="mpaa_rating", length=5)
-	private String mpaa_rating;
+	private String mpaaRating;
 
 	@Column(length=45)
 	private String platform;
 
 	@Column(name="reference_number", nullable=false)
-	private int reference_number;
+	private int referenceNumber;
 
     @Temporal( TemporalType.DATE)
 	@Column(name="release_year", nullable=false)
-	private Date release_year;
+	private Date releaseYear;
 
 	@Column(nullable=false, length=500)
 	private String synopsis;
@@ -57,143 +60,164 @@ public class Item implements Serializable {
 	private String title;
 
 	@Column(name="trailer_url", length=200)
-	private String trailer_url;
+	private String trailerUrl;
 
 	@Column(nullable=false, length=45)
 	private String type;
 
 	@Column(name="user_rating")
-	private int user_rating;
+	private int userRating;
+
+	//bi-directional many-to-many association to User
+    @ManyToMany
+	@JoinTable(
+		name="Member_has_Item"
+		, joinColumns={
+			@JoinColumn(name="item_id", nullable=false)
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="username", nullable=false)
+			}
+		)
+	private Set<User> users;
 
     public Item() {
     }
 
-	public int get_item_id() {
-		return this.item_id;
+	public int getItemId() {
+		return this.itemId;
 	}
 
-	public void set_item_id(int item_id) {
-		this.item_id = item_id;
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
 	}
 
-	public String get_developer() {
+	public String getDeveloper() {
 		return this.developer;
 	}
 
-	public void set_developer(String developer) {
+	public void setDeveloper(String developer) {
 		this.developer = developer;
 	}
 
-	public String get_director() {
+	public String getDirector() {
 		return this.director;
 	}
 
-	public void set_director(String director) {
+	public void setDirector(String director) {
 		this.director = director;
 	}
 
-	public String get_esrb_rating() {
-		return this.esrb_rating;
+	public String getEsrbRating() {
+		return this.esrbRating;
 	}
 
-	public void set_esrb_rating(String esrb_rating) {
-		this.esrb_rating = esrb_rating;
+	public void setEsrbRating(String esrbRating) {
+		this.esrbRating = esrbRating;
 	}
 
-	public String get_genre() {
+	public String getGenre() {
 		return this.genre;
 	}
 
-	public void set_genre(String genre) {
+	public void setGenre(String genre) {
 		this.genre = genre;
 	}
 
-	public String get_image_url() {
-		return this.image_url;
+	public String getImageUrl() {
+		return this.imageUrl;
 	}
 
-	public void set_image_url(String image_url) {
-		this.image_url = image_url;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
-	public byte get_is_out() {
-		return this.is_out;
+	public byte getIsOut() {
+		return this.isOut;
 	}
 
-	public void set_is_out(byte is_out) {
-		this.is_out = is_out;
+	public void setIsOut(byte isOut) {
+		this.isOut = isOut;
 	}
 
-	public String get_mpaa_rating() {
-		return this.mpaa_rating;
+	public String getMpaaRating() {
+		return this.mpaaRating;
 	}
 
-	public void set_mpaa_rating(String mpaa_rating) {
-		this.mpaa_rating = mpaa_rating;
+	public void setMpaaRating(String mpaaRating) {
+		this.mpaaRating = mpaaRating;
 	}
 
-	public String get_platform() {
+	public String getPlatform() {
 		return this.platform;
 	}
 
-	public void set_platform(String platform) {
+	public void setPlatform(String platform) {
 		this.platform = platform;
 	}
 
-	public int get_reference_number() {
-		return this.reference_number;
+	public int getReferenceNumber() {
+		return this.referenceNumber;
 	}
 
-	public void set_reference_number(int reference_number) {
-		this.reference_number = reference_number;
+	public void setReferenceNumber(int referenceNumber) {
+		this.referenceNumber = referenceNumber;
 	}
 
-	public Date get_release_year() {
-		return this.release_year;
+	public Date getReleaseYear() {
+		return this.releaseYear;
 	}
 
-	public void set_release_year(Date release_year) {
-		this.release_year = release_year;
+	public void setReleaseYear(Date releaseYear) {
+		this.releaseYear = releaseYear;
 	}
 
-	public String get_synopsis() {
+	public String getSynopsis() {
 		return this.synopsis;
 	}
 
-	public void set_synopsis(String synopsis) {
+	public void setSynopsis(String synopsis) {
 		this.synopsis = synopsis;
 	}
 
-	public String get_title() {
+	public String getTitle() {
 		return this.title;
 	}
 
-	public void set_title(String title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 
-	public String get_trailer_url() {
-		return this.trailer_url;
+	public String getTrailerUrl() {
+		return this.trailerUrl;
 	}
 
-	public void set_trailer_url(String trailer_url) {
-		this.trailer_url = trailer_url;
+	public void setTrailerUrl(String trailerUrl) {
+		this.trailerUrl = trailerUrl;
 	}
 
-	public String get_type() {
+	public String getType() {
 		return this.type;
 	}
 
-	public void set_type(String type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
-	public int get_user_rating() {
-		return this.user_rating;
+	public int getUserRating() {
+		return this.userRating;
 	}
 
-	public void set_user_rating(int user_rating) {
-		this.user_rating = user_rating;
+	public void setUserRating(int userRating) {
+		this.userRating = userRating;
 	}
 
+	public Set<User> getUsers() {
+		return this.users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
+	
 }

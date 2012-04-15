@@ -1,17 +1,17 @@
-/**
- * 
- */
 package g5.ambience.user;
 
-import java.io.Serializable;
+import g5.ambience.item.Item;
 
+import java.io.Serializable;
 import javax.persistence.*;
 
+import java.util.Date;
+import java.util.Set;
 
 
 /**
- * @author ilya
- *
+ * The persistent class for the User database table.
+ * 
  */
 @Entity
 @Table(name="User")
@@ -19,151 +19,245 @@ import javax.persistence.*;
 @DiscriminatorColumn(name="is_admin")
 @DiscriminatorValue("false")
 public class User implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6072515475403687595L;
 	@Id
+	@GeneratedValue(strategy=GenerationType.TABLE)
+	@Column(unique=true, nullable=false, length=45)
 	private String username;
-	private String first_name;
-	private String last_name;
+
+    @Temporal( TemporalType.DATE)
+	@Column(name="cc_expiration")
+	private Date ccExpiration;
+
+	@Column(name="cc_name", length=60)
+	private String ccName;
+
+	@Column(name="cc_number")
+	private int ccNumber;
+
+	@Column(name="cc_security")
+	private int ccSecurity;
+
+	@Column(length=45)
+	private String city;
+
+    @Temporal( TemporalType.DATE)
+	private Date dob;
+
+	@Column(nullable=false, length=60)
 	private String email;
-	@Column(name="password_hash")
-	private String password;
-	private boolean is_admin;
-	@Transient
-	private int default_login_attempts = 5;
-	@Transient
-	private int available_login_attempts;
-	
-	
-	
-	/**
-	 * The default User constructor takes no parameters but only initializes the available
-	 * login attempts that every user has by default. The default is stored in the
-	 * default_login_attempts and is usually 5.
-	 */	
-	public User(){
-		available_login_attempts = default_login_attempts;
+
+	@Column(name="first_name", length=45)
+	private String firstName;
+
+	@Column(name="is_admin", nullable=false)
+	private byte isAdmin;
+
+	@Column(name="last_name", length=45)
+	private String lastName;
+
+	@Column(name="membership_plan", length=45)
+	private String membershipPlan;
+
+	@Column(name="password_hash", nullable=false, length=32)
+	private String passwordHash;
+
+	@Column(name="profile_image", length=100)
+	private String profileImage;
+
+	@Column(length=45)
+	private String state;
+
+	@Column(length=45)
+	private String street;
+
+	@Column(name="street_opt", length=45)
+	private String streetOpt;
+
+	private int zipcode;
+
+	//bi-directional many-to-many association to Item
+	@ManyToMany(mappedBy="users")
+	private Set<Item> items;
+
+    public User() {
+    }
+
+	public String getUsername() {
+		return this.username;
 	}
 
-	/**
-	 * A simple getter method for the username of a {@link User} which can be either 
-	 * a {@link Member} or {@link Admin}. This getter returns a unique String object. 
-	 * 
-	 * @return username	a case-sensitive {@url String} which is unique across the whole system.
-	 * @see Member
-	 * @see Admin
-	 * @see User
-	 */
-	public String get_username() {
-		return username;
-	}
-	/**
-	 * @param username the username to set
-	 */
-	public void set_username(String username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
-	/**
-	 * @return the first_name
-	 */
-	public String get_first_name() {
-		return first_name;
+
+	public Date getCcExpiration() {
+		return this.ccExpiration;
 	}
-	/**
-	 * @param first_name the first_name to set
-	 */
-	public void set_first_name(String first_name) {
-		this.first_name = first_name;
+
+	public void setCcExpiration(Date ccExpiration) {
+		this.ccExpiration = ccExpiration;
 	}
-	/**
-	 * @return the last_name
-	 */
-	public String get_last_name() {
-		return last_name;
+
+	public String getCcName() {
+		return this.ccName;
 	}
-	/**
-	 * @param last_name the last_name to set
-	 */
-	public void set_last_name(String last_name) {
-		this.last_name = last_name;
+
+	public void setCcName(String ccName) {
+		this.ccName = ccName;
 	}
-	/**
-	 * @return the email
-	 */
-	public String get_email() {
-		return email;
+
+	public int getCcNumber() {
+		return this.ccNumber;
 	}
-	/**
-	 * @param email the email to set
-	 */
-	public void set_email(String email) {
+
+	public void setCcNumber(int ccNumber) {
+		this.ccNumber = ccNumber;
+	}
+
+	public int getCcSecurity() {
+		return this.ccSecurity;
+	}
+
+	public void setCcSecurity(int ccSecurity) {
+		this.ccSecurity = ccSecurity;
+	}
+
+	public String getCity() {
+		return this.city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public Date getDob() {
+		return this.dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
 		this.email = email;
 	}
-	/**
-	 * @param password the password to set
-	 */
-	public void set_password(String password) {
-		this.password = password;
-	}	
+
+	public String getFirstName() {
+		return this.firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public byte getIsAdmin() {
+		return this.isAdmin;
+	}
+
+	public void setIsAdmin(byte isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+	public String getLastName() {
+		return this.lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getMembershipPlan() {
+		return this.membershipPlan;
+	}
+
+	public void setMembershipPlan(String membershipPlan) {
+		this.membershipPlan = membershipPlan;
+	}
+
+	public String getPasswordHash() {
+		return this.passwordHash;
+	}
+
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
+	}
+
+	public String getProfileImage() {
+		return this.profileImage;
+	}
+
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
+	}
+
+	public String getState() {
+		return this.state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getStreet() {
+		return this.street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getStreetOpt() {
+		return this.streetOpt;
+	}
+
+	public void setStreetOpt(String streetOpt) {
+		this.streetOpt = streetOpt;
+	}
+
+	public int getZipcode() {
+		return this.zipcode;
+	}
+
+	public void setZipcode(int zipcode) {
+		this.zipcode = zipcode;
+	}
 	
 	/**
-	 * @return the password
-	 */
-	public String get_password() {
-		return password;
-	}
-	
-	/**
-	 * @return the is_admin
-	 */
-	public boolean get_is_admin() {
-		return is_admin;
-	}
-
-	/**
-	 * @param is_admin the is_admin to set
-	 */
-	public void set_is_admin(boolean is_admin) {
-		this.is_admin = is_admin;
-	}
-
-	public void reset_login_attempts(){
-		this.available_login_attempts = default_login_attempts;
-	}
-	
-	/**
-	 * @return the login_attempts
-	 */
-	public int get_login_attempts() {
-		return available_login_attempts;
-	}
-
-	/**
-	 * @param login_attempts the login_attempts to set
-	 */
-	public void dec_login_attempts() {
-		this.available_login_attempts -= 1;
-	}
-
-	/**
-	 * A simple login function for testing functionality. This function can be used by
-	 * the {@link Memeber} or {@link Admin} classes and currently only allows the following
-	 * user/password: Admin/password
+	 * This returns the user's bundle
 	 * 
-	 * @return success or failure	the return value of this function tells the system which page to render.
+	 * @return Set<Item>
 	 */
-	public String login() {
-        
-		if(get_username().equals("admin") && get_password().equals("password")){
-			reset_login_attempts();
-			return "success";
-		}
-		else {
-			dec_login_attempts();			
-			return "failure";
+	public Set<Item> get_bundle() {
+		return this.items;
+	}
+	
+	
+	/**
+	 * Adds an item to a purchase bundle when a user chooses it through the interface. 
+	 * 
+	 * @param item
+	 * @return void
+	 */
+	public void add_to_bundle(Item item){
+		this.items.add(item);
+	}
+	
+	/**
+	 * Removes an item from the purchase bundle when the user chooses it from the bundle interface
+	 * 
+	 * @param item
+	 * @return void
+	 */
+	public void remove_from_bundle(Item item){
+		if(this.items.contains(item)){
+			this.items.remove(item);
 		}
 	}
+	
 }

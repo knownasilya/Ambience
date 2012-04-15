@@ -2,9 +2,11 @@
  * 
  */
 package g5.ambience.user.member.model;
+import g5.ambience.item.Item;
 import g5.ambience.user.User;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -13,6 +15,7 @@ import javax.persistence.*;
  *
  */
 @Entity
+@Table(name="User")
 @DiscriminatorValue("false")
 public class Member extends User {
 	
@@ -29,27 +32,6 @@ public class Member extends User {
 	private int cc_number;
 	private int cc_security;
 	private Date cc_expiration; 
-	
-	/**
-	 * @return the username
-	 *//*
-	public String get_username(){
-		return super.get_username();
-	}
-	
-	public void set_username(String username){
-		super.set_username(username);
-	}
-	
-	public String get_password(){
-		return super.get_password();
-	}
-	
-	public void set_password(String password){
-		super.set_password(password);
-	}*/
-	
-	
 	
 	/**
 	 * @return the profile_image
@@ -158,6 +140,5 @@ public class Member extends User {
 	 */
 	public void set_cc_expiration(Date cc_expiration) {
 		this.cc_expiration = cc_expiration;
-	}	
-	
+	}		
 }
