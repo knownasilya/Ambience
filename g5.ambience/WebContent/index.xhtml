@@ -12,11 +12,10 @@
 	<h:body>
 		<h:form>
 			<h:outputLabel value="#{msg.username}" for="username"></h:outputLabel>
-			<h:inputText value="#{user._username}" id="username"></h:inputText>
-			<h:outputLabel value="#{msg.password}" for="password"></h:outputLabel>
-			<h:inputSecret value="#{user._password}" id="password"></h:inputSecret>
-			<h:commandButton action="#{user.login}" value="#{msg.login}"></h:commandButton><br/>
+			<h:inputText value="#{user.username}" id="username"></h:inputText>
+			<h:outputLabel value="#{msg.email}" for="password"></h:outputLabel>
+            <h:inputSecret value="#{user.email}" id="password"/>
+			<h:commandButton id="submit" value="#{msg.create}" action="#{admin.createMemeber}"/>
 		</h:form>
-		You have <h:outputText value="#{user._login_attempts}"></h:outputText> login attempts left.
 	</h:body>
 </html>

@@ -81,8 +81,9 @@ public class Item implements Serializable {
 		)
 	private Set<User> users;
 
-    public Item() {
-    }
+	//bi-directional many-to-one association to Member_has_Item
+	@OneToMany(mappedBy="item")
+	private Set<Member_has_Item> memberHasItems;
 
 	public int getItemId() {
 		return this.itemId;
@@ -218,6 +219,14 @@ public class Item implements Serializable {
 
 	public void setUsers(Set<User> users) {
 		this.users = users;
+	}
+	
+	public Set<Member_has_Item> getMemberHasItems() {
+		return this.memberHasItems;
+	}
+
+	public void setMemberHasItems(Set<Member_has_Item> memberHasItems) {
+		this.memberHasItems = memberHasItems;
 	}
 	
 }

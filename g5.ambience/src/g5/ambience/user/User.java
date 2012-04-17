@@ -1,8 +1,11 @@
 package g5.ambience.user;
 
 import g5.ambience.item.Item;
+import g5.ambience.item.Member_has_Item;
 
 import java.io.Serializable;
+
+import javax.faces.context.FacesContext;
 import javax.persistence.*;
 
 import java.util.Date;
@@ -14,30 +17,20 @@ import java.util.Set;
  * 
  */
 @Entity
-@Table(name="User")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="is_admin")
-@DiscriminatorValue("false")
+@DiscriminatorColumn(name="role",discriminatorType=DiscriminatorType.INTEGER,columnDefinition="role")
+@DiscriminatorValue("user")
+@Table(name="User")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	@PersistenceContext
+	private EntityManager em;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.TABLE)
 	@Column(unique=true, nullable=false, length=45)
 	private String username;
-
-    @Temporal( TemporalType.DATE)
-	@Column(name="cc_expiration")
-	private Date ccExpiration;
-
-	@Column(name="cc_name", length=60)
-	private String ccName;
-
-	@Column(name="cc_number")
-	private int ccNumber;
-
-	@Column(name="cc_security")
-	private int ccSecurity;
 
 	@Column(length=45)
 	private String city;
@@ -51,20 +44,14 @@ public class User implements Serializable {
 	@Column(name="first_name", length=45)
 	private String firstName;
 
-	@Column(name="is_admin", nullable=false)
-	private byte isAdmin;
+	@Column(name="role", nullable=false)
+	private String role;
 
 	@Column(name="last_name", length=45)
 	private String lastName;
 
-	@Column(name="membership_plan", length=45)
-	private String membershipPlan;
-
 	@Column(name="password_hash", nullable=false, length=32)
 	private String passwordHash;
-
-	@Column(name="profile_image", length=100)
-	private String profileImage;
 
 	@Column(length=45)
 	private String state;
@@ -81,6 +68,10 @@ public class User implements Serializable {
 	@ManyToMany(mappedBy="users")
 	private Set<Item> items;
 
+	//bi-directional many-to-one association to Member_has_Item
+	@OneToMany(mappedBy="user")
+	private Set<Member_has_Item> bundles;
+
     public User() {
     }
 
@@ -90,38 +81,6 @@ public class User implements Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public Date getCcExpiration() {
-		return this.ccExpiration;
-	}
-
-	public void setCcExpiration(Date ccExpiration) {
-		this.ccExpiration = ccExpiration;
-	}
-
-	public String getCcName() {
-		return this.ccName;
-	}
-
-	public void setCcName(String ccName) {
-		this.ccName = ccName;
-	}
-
-	public int getCcNumber() {
-		return this.ccNumber;
-	}
-
-	public void setCcNumber(int ccNumber) {
-		this.ccNumber = ccNumber;
-	}
-
-	public int getCcSecurity() {
-		return this.ccSecurity;
-	}
-
-	public void setCcSecurity(int ccSecurity) {
-		this.ccSecurity = ccSecurity;
 	}
 
 	public String getCity() {
@@ -156,12 +115,12 @@ public class User implements Serializable {
 		this.firstName = firstName;
 	}
 
-	public byte getIsAdmin() {
-		return this.isAdmin;
+	public String getRole() {
+		return this.role;
 	}
 
-	public void setIsAdmin(byte isAdmin) {
-		this.isAdmin = isAdmin;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public String getLastName() {
@@ -172,13 +131,7 @@ public class User implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public String getMembershipPlan() {
-		return this.membershipPlan;
-	}
-
-	public void setMembershipPlan(String membershipPlan) {
-		this.membershipPlan = membershipPlan;
-	}
+	
 
 	public String getPasswordHash() {
 		return this.passwordHash;
@@ -186,14 +139,6 @@ public class User implements Serializable {
 
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
-	}
-
-	public String getProfileImage() {
-		return this.profileImage;
-	}
-
-	public void setProfileImage(String profileImage) {
-		this.profileImage = profileImage;
 	}
 
 	public String getState() {
@@ -229,24 +174,32 @@ public class User implements Serializable {
 	}
 	
 	/**
-	 * This returns the user's bundle
-	 * 
-	 * @return Set<Item>
-	 */
-	public Set<Item> get_bundle() {
-		return this.items;
-	}
-	
-	
-	/**
 	 * Adds an item to a purchase bundle when a user chooses it through the interface. 
 	 * 
 	 * @param item
 	 * @return void
 	 */
-	public void add_to_bundle(Item item){
+	public void addToBundle(Item item){
 		this.items.add(item);
 	}
+	
+	public Set<Member_has_Item> getAllBundles() {
+		return this.bundles;
+	}
+
+	public void addBundles(Set<Member_has_Item> bundles) {
+		this.bundles = bundles;
+	}
+	
+	/**
+	 * This returns the user's bundle
+	 * 
+	 * @return Set<Item>
+	 */
+	public Set<Item> getBundle() {
+		return this.items;
+	}
+
 	
 	/**
 	 * Removes an item from the purchase bundle when the user chooses it from the bundle interface
@@ -254,10 +207,36 @@ public class User implements Serializable {
 	 * @param item
 	 * @return void
 	 */
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
 	public void remove_from_bundle(Item item){
 		if(this.items.contains(item)){
 			this.items.remove(item);
 		}
 	}
 	
+	public boolean is_registered(String username, String pass) {	
+		
+		try {
+			User user = em.find(User.class, username);
+			if (user.getPasswordHash().equals(pass) && user.getUsername().equals(username)) {
+	        	FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", user);
+	        	return true;
+	        } else {
+	        	return false;
+	        }
+		} catch(NullPointerException e){
+			System.out.println(e);
+		}
+		
+		return false;        
+    }
+	
+	
+	public String login(){
+		if(is_registered(username, passwordHash)){
+			return "success";
+		} else {
+			return "failure";
+		}
+	}
 }
