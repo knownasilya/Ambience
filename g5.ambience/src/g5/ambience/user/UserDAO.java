@@ -9,7 +9,8 @@ import g5.ambience.user.model.User;
 
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 
 /**
  * @author ilya
@@ -17,8 +18,10 @@ import javax.persistence.PersistenceContext;
  */
 public class UserDAO {
 	
-	@PersistenceContext
-	private EntityManager em;
+	@PersistenceUnit
+	EntityManagerFactory emf;
+	
+	EntityManager em = emf.createEntityManager();
 	Map<String,String> params;
 	
 	FacesContext fc;
