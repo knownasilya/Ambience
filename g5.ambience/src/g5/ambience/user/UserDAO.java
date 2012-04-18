@@ -23,6 +23,9 @@ public class UserDAO {
 	
 	FacesContext fc;
 	
+	private String username;
+	private String password;
+	
 	
 	public boolean valid_user(String username, String pass) {	
 		
@@ -44,11 +47,39 @@ public class UserDAO {
 	public String login(){
 		fc = FacesContext.getCurrentInstance();
 		params = fc.getExternalContext().getRequestParameterMap();
-		if(valid_user(params.get("username"),params.get("email"))){
+		if(valid_user(username, password)){
 			return "success";
 		} else {
 			return "failure";
 		}
+	}
+
+	/**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return username;
+	}
+
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

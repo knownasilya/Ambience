@@ -12,13 +12,10 @@
 	<h:body>
 		<h:form>
 			<h:outputLabel value="#{msg.username}" for="username"></h:outputLabel>
-			<h:inputText value="#{username}" id="username"></h:inputText>
+			<h:inputText value="#{userDAO.username}" id="username"></h:inputText>
 			<h:outputLabel value="#{msg.password}" for="password"></h:outputLabel>
-            <h:inputSecret value="#{password}" id="password"/>
-			<h:commandButton id="submit" value="#{msg.login}" action="#{userDAO.login}">
-			     <f:param name="action" value="username" />
-			     <f:param name="action" value="password" />
-			</h:commandButton>
+            <h:inputSecret value="#{userDAO.password}" id="password"/>
+			<h:commandButton id="submit" value="#{msg.login}" action="#{userDAO.login}"/>
 		</h:form>
 	</h:body>
 </html>
