@@ -3,7 +3,7 @@
  */
 package g5.ambience.user.member.model;
 
-import g5.ambience.user.User;
+import g5.ambience.user.model.User;
 
 import java.util.Date;
 

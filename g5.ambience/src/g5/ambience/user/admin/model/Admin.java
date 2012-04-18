@@ -5,9 +5,9 @@ package g5.ambience.user.admin.model;
 
 import javax.persistence.*;
 
-import g5.ambience.item.Item;
-import g5.ambience.user.User;
+import g5.ambience.item.model.Item;
 import g5.ambience.user.member.model.Member;
+import g5.ambience.user.model.User;
 
 /**
  * @author ilya

@@ -1,4 +1,4 @@
-package g5.ambience.item;
+package g5.ambience.item.model;
 
 import java.io.Serializable;
 import javax.persistence.*;

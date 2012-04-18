@@ -1,6 +1,6 @@
-package g5.ambience.item;
+package g5.ambience.item.model;
 
-import g5.ambience.user.User;
+import g5.ambience.user.model.User;
 
 import java.io.Serializable;
 import javax.persistence.*;

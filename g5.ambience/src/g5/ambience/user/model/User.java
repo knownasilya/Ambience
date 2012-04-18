@@ -1,7 +1,7 @@
-package g5.ambience.user;
+package g5.ambience.user.model;
 
-import g5.ambience.item.Item;
-import g5.ambience.item.Member_has_Item;
+import g5.ambience.item.model.Item;
+import g5.ambience.item.model.Member_has_Item;
 
 import java.io.Serializable;
 
