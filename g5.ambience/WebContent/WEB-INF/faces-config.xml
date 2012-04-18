@@ -2,21 +2,11 @@
 <faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
  xmlns:xi="http://www.w3.org/2001/XInclude"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
- <managed-bean>
-  <managed-bean-name>user</managed-bean-name>
-  <managed-bean-class>g5.ambience.user.User</managed-bean-class>
-  <managed-bean-scope>session</managed-bean-scope>
- </managed-bean>
- <managed-bean>
-  <managed-bean-name>member</managed-bean-name>
-  <managed-bean-class>g5.ambience.user.member.model.Member</managed-bean-class>
-  <managed-bean-scope>session</managed-bean-scope>
- </managed-bean>
- <managed-bean>
-  <managed-bean-name>admin</managed-bean-name>
-  <managed-bean-class>g5.ambience.user.admin.model.Admin</managed-bean-class>
-  <managed-bean-scope>session</managed-bean-scope>
- </managed-bean>
+	<managed-bean>
+		<managed-bean-name>userDAO</managed-bean-name>
+		<managed-bean-class>g5.ambience.user.UserDAO</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
  <navigation-rule>
   <display-name>index.xhtml</display-name>
   <from-view-id>/index.xhtml</from-view-id>

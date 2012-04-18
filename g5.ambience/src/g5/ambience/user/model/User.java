@@ -4,8 +4,6 @@ import g5.ambience.item.model.Item;
 import g5.ambience.item.model.Member_has_Item;
 
 import java.io.Serializable;
-
-import javax.faces.context.FacesContext;
 import javax.persistence.*;
 
 import java.util.Date;
@@ -23,9 +21,7 @@ import java.util.Set;
 @Table(name="User")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	@PersistenceContext
-	private EntityManager em;
+
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.TABLE)
@@ -213,7 +209,7 @@ public class User implements Serializable {
 			this.items.remove(item);
 		}
 	}
-	
+	/*
 	public boolean is_registered(String username, String pass) {	
 		
 		try {
@@ -238,5 +234,5 @@ public class User implements Serializable {
 		} else {
 			return "failure";
 		}
-	}
+	}*/
 }
