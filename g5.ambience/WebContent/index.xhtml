@@ -12,10 +12,17 @@
 	<h:body>
 		<h:form>
 			<h:outputLabel value="#{msg.username}" for="username"></h:outputLabel>
-			<h:inputText value="#{userDAO.username}" id="username"></h:inputText>
+			<h:inputText value="#{userView.username}" id="username"></h:inputText>
 			<h:outputLabel value="#{msg.password}" for="password"></h:outputLabel>
-            <h:inputSecret value="#{userDAO.password}" id="password"/>
-			<h:commandButton id="submit" value="#{msg.login}" action="#{userDAO.login}"/>
+            <h:inputSecret value="#{userView.password}" id="password"/>
+			<h:commandButton value="orders"
+                       type="submit"
+                       actionListener="#{userView.userLogin}">
+                <f:facet name="extraParameter">
+                    <f:param name="loginUsernameParam" value="#{userView.username}"/>
+                    <f:param name="loginPasswordParam" value="#{userView.password}"/>
+                </f:facet>
+            </h:commandButton>
 		</h:form>
 	</h:body>
 </html>

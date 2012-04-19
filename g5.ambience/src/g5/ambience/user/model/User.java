@@ -8,6 +8,8 @@ import javax.persistence.*;
 
 import java.util.Date;
 import java.util.Set;
+import static javax.persistence.CascadeType.PERSIST;
+import static javax.persistence.CascadeType.ALL;
 
 
 /**
@@ -19,6 +21,12 @@ import java.util.Set;
 @DiscriminatorColumn(name="role",discriminatorType=DiscriminatorType.INTEGER,columnDefinition="role")
 @DiscriminatorValue("user")
 @Table(name="User")
+@NamedQueries({
+@NamedQuery(
+	    name="usersActiveBundles",
+	    query="SELECT b FROM Member_has_Item b, User u WHERE b.username = :username AND b.returned_date = null"
+	)
+})
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -61,11 +69,11 @@ public class User implements Serializable {
 	private int zipcode;
 
 	//bi-directional many-to-many association to Item
-	@ManyToMany(mappedBy="users")
+	@ManyToMany(mappedBy="users", cascade = { PERSIST, ALL })
 	private Set<Item> items;
 
 	//bi-directional many-to-one association to Member_has_Item
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", cascade = { ALL, PERSIST })
 	private Set<Member_has_Item> bundles;
 
     public User() {

@@ -3,9 +3,14 @@
  xmlns:xi="http://www.w3.org/2001/XInclude"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
 	<managed-bean>
-		<managed-bean-name>userDAO</managed-bean-name>
-		<managed-bean-class>g5.ambience.user.UserDAO</managed-bean-class>
+		<managed-bean-name>userView</managed-bean-name>
+		<managed-bean-class>g5.ambience.view.UserView</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>jPAResourceBean</managed-bean-name>
+		<managed-bean-class>g5.ambience.utils.JPAResourceBean</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
  <navigation-rule>
   <display-name>index.xhtml</display-name>
