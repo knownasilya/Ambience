@@ -1,0 +1,16 @@
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-04-23 19:45:39
+project --topLevelPackage g5.ambience
+jpa setup --database MYSQL --provider ECLIPSELINK --databaseName Ambience --userName root --password password
+database reverse engineer --schema Ambience --package ~.domain --testAutomatically true
+// [failed] test integration --entity g5.ambience
+test integration --entity ~.domain.ItemEntity
+// [failed] test integration --entity ~.domain.ItemEntityIntegrationTest
+web mvc setup
+web mvc all --package g5.ambience.domain
+security setup
+perform eclipse
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-04-23 20:21:18
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-04-23 20:21:34
+web mvc finder all
+finder list --class ~.domain.UserEntity

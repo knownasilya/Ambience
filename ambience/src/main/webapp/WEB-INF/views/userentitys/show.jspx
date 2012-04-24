@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_g5_ambience_domain_UserEntity" object="${userentity}" path="/userentitys" z="Xj6L9rUimAYDicX6PwqASZoby1g=">
+        <field:display field="email" id="s_g5_ambience_domain_UserEntity_email" object="${userentity}" z="FxHz8hs/9Wx0zIP/7OaxgrbKlUE="/>
+        <field:display field="passwordHash" id="s_g5_ambience_domain_UserEntity_passwordHash" object="${userentity}" z="yeMiFHLWEAkdC+2A5xQerSoXTTs="/>
+        <field:display field="membershipPlan" id="s_g5_ambience_domain_UserEntity_membershipPlan" object="${userentity}" z="zXX9X4fCV+WQh5lwwiMhfdAoIns="/>
+        <field:display date="true" dateTimePattern="${userEntity_dob_date_format}" field="dob" id="s_g5_ambience_domain_UserEntity_dob" object="${userentity}" z="yPzF2e+5ysIwKcXvXlsSIH5hOzM="/>
+        <field:display field="firstName" id="s_g5_ambience_domain_UserEntity_firstName" object="${userentity}" z="Llf1yiCnIDlwnwB2klBxv6lmfFE="/>
+        <field:display field="lastName" id="s_g5_ambience_domain_UserEntity_lastName" object="${userentity}" z="r8ZkAWiWMXT7qlWnWGuF8tEqrvQ="/>
+        <field:display field="street" id="s_g5_ambience_domain_UserEntity_street" object="${userentity}" z="80bBd6r2sJtBVKzInTVdpzj/2J8="/>
+        <field:display field="streetOpt" id="s_g5_ambience_domain_UserEntity_streetOpt" object="${userentity}" z="UpbXAkGoYo8nF1I3NJqWrQ2E0F8="/>
+        <field:display field="city" id="s_g5_ambience_domain_UserEntity_city" object="${userentity}" z="1n/vdMWsdNte2W9LE/U6E5coIoI="/>
+        <field:display field="state" id="s_g5_ambience_domain_UserEntity_state" object="${userentity}" z="ArHNbg+Odvf5eiup+/gZLKP0zhU="/>
+        <field:display field="zipcode" id="s_g5_ambience_domain_UserEntity_zipcode" object="${userentity}" z="E5iKkEhGOjEFly8C4L1VtkXc6vQ="/>
+        <field:display field="ccNumber" id="s_g5_ambience_domain_UserEntity_ccNumber" object="${userentity}" z="2hHiLSHput+vRxbwLRlFc6FIAJI="/>
+        <field:display date="true" dateTimePattern="${userEntity_ccexpiration_date_format}" field="ccExpiration" id="s_g5_ambience_domain_UserEntity_ccExpiration" object="${userentity}" z="Pw1u7fQe2hXvL/6uA+kmMX72KMQ="/>
+        <field:display field="ccSecurity" id="s_g5_ambience_domain_UserEntity_ccSecurity" object="${userentity}" z="ld5N+rlXe6kRby0utrZNcP5ZgQI="/>
+        <field:display field="ccName" id="s_g5_ambience_domain_UserEntity_ccName" object="${userentity}" z="nTjzjThB00hI565s2xNbQ2LKJRI="/>
+        <field:display field="profileImage" id="s_g5_ambience_domain_UserEntity_profileImage" object="${userentity}" z="BQL2PgealQdoGwQqEU99cED/qZ4="/>
+        <field:display field="role" id="s_g5_ambience_domain_UserEntity_role" object="${userentity}" z="N6wcY4S3RObWCbEbhcYOdX5UEbw="/>
+    </page:show>
+</div>

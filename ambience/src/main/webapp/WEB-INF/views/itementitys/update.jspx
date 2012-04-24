@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_g5_ambience_domain_ItemEntity" idField="itemId" modelAttribute="itemEntity" path="/itementitys" versionField="none" z="vhuqSMzAUhuH6fzW0IS9Q0wLlA8=">
+        <field:simple field="bundleEntities" id="c_g5_ambience_domain_ItemEntity_bundleEntities" messageCode="entity_reference_not_managed" messageCodeAttribute="Bundle Entity" z="jcvSGWJCgxRxz4z0ESHlgkQrIrI="/>
+        <field:input field="title" id="c_g5_ambience_domain_ItemEntity_title" required="true" z="lyCX3x/G3CXRsD0LfMv9wHoG7j4="/>
+        <field:datetime dateTimePattern="${itemEntity_releaseyear_date_format}" field="releaseYear" id="c_g5_ambience_domain_ItemEntity_releaseYear" required="true" z="lXmKt0VpJu9TJcsb1VZ8AxgcBVk="/>
+        <field:input field="type" id="c_g5_ambience_domain_ItemEntity_type" required="true" z="PPKihrIFNijp9HOFx+vnhiB/BuM="/>
+        <field:input field="platform" id="c_g5_ambience_domain_ItemEntity_platform" z="9vEY3by2yDE1FwcdwUj3BRx2ZNw="/>
+        <field:input field="genre" id="c_g5_ambience_domain_ItemEntity_genre" required="true" z="Uc6Tf8xdKNm+mynO0860OXSOz14="/>
+        <field:checkbox field="isOut" id="c_g5_ambience_domain_ItemEntity_isOut" z="hIgp+XvBafkvGapWDRDHI5oW/ls="/>
+        <field:input field="userRating" id="c_g5_ambience_domain_ItemEntity_userRating" validationMessageCode="field_invalid_integer" z="aohfW2n772+nFBwHV35zelNnCFY="/>
+        <field:input field="esrbRating" id="c_g5_ambience_domain_ItemEntity_esrbRating" z="CVG+pAGA/yhjFZvXu2AZbelVxgc="/>
+        <field:input field="referenceNumber" id="c_g5_ambience_domain_ItemEntity_referenceNumber" required="true" validationMessageCode="field_invalid_integer" z="ZX8EhSNYDlZJvsFrG5sfyjrpYuI="/>
+        <field:input field="director" id="c_g5_ambience_domain_ItemEntity_director" z="CIrY1LdNbB24Y9gb4VfQlil2W+U="/>
+        <field:input field="trailerUrl" id="c_g5_ambience_domain_ItemEntity_trailerUrl" z="V07TPYKUOdzIFNVzi1o4yX+xNYs="/>
+        <field:input field="synopsis" id="c_g5_ambience_domain_ItemEntity_synopsis" required="true" z="1EUvtRE3p0BY/BtHs9guHAFElac="/>
+        <field:input field="imageUrl" id="c_g5_ambience_domain_ItemEntity_imageUrl" required="true" z="nPuWHUJiRZ+v+XonpvYXRigcZwc="/>
+        <field:input field="developer" id="c_g5_ambience_domain_ItemEntity_developer" z="ylbXK309AiOibCyZkAC4Wywj9gk="/>
+        <field:input field="mpaaRating" id="c_g5_ambience_domain_ItemEntity_mpaaRating" z="uT1frPo1r6qf4LxzYcgP6XvOIUc="/>
+    </form:update>
+</div>
