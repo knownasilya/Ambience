@@ -1,6 +1,8 @@
 package g5.ambience.domain;
 
-import org.springframework.format.FormatterRegistry;
+import java.util.Set;
+
+import org.springframework.format.FormatterRegistrar;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
 import org.springframework.roo.addon.web.mvc.controller.converter.RooConversionService;
 
@@ -10,9 +12,13 @@ import org.springframework.roo.addon.web.mvc.controller.converter.RooConversionS
 @RooConversionService
 public class ApplicationConversionServiceFactoryBean extends FormattingConversionServiceFactoryBean {
 
-	@Override
+	/*@Override
 	protected void installFormatters(FormatterRegistry registry) {
 		super.installFormatters(registry);
 		// Register application converters and formatters
+	}*/
+	@Override
+	public void setFormatterRegistrars(Set<FormatterRegistrar> formatterRegistrars){
+		super.setFormatterRegistrars(formatterRegistrars);
 	}
 }
