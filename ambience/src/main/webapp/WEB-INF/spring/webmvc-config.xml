@@ -73,5 +73,5 @@
       </list>
     </property>
   </bean>
-<bean class="g5.ambience.domain.ApplicationConversionServiceFactoryBean" id="applicationConversionService"/>
+<bean class="g5.ambience.web.ui.ApplicationConversionServiceFactoryBean" id="applicationConversionService"/>
 </beans>

@@ -2,12 +2,12 @@
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl_g5_ambience_domain_BundleEntity" items="${bundleentitys}" z="QiDyrnUssV9C0Vly0IJwVVl959Q=">
-        <table:table data="${bundleentitys}" id="l_g5_ambience_domain_BundleEntity" path="/bundleentitys" z="g8v53dsgh/h0gDA9pN0hFBE7ocE=">
-            <table:column id="c_g5_ambience_domain_BundleEntity_itemId" property="itemId" z="YveZNdUtlPz6TyCSTRENSFX4CCM="/>
-            <table:column id="c_g5_ambience_domain_BundleEntity_username" property="username" z="0xMVh/2lTe8IXJcMrYky61CbZxw="/>
-            <table:column id="c_g5_ambience_domain_BundleEntity_userRating" property="userRating" z="eIu/JbbdraIsLrVnMHEqepjaGDg="/>
-            <table:column date="true" dateTimePattern="${bundleEntity_returneddate_date_format}" id="c_g5_ambience_domain_BundleEntity_returnedDate" property="returnedDate" z="fgRxR9jfFbRzvu4cQbtmhfG0s/M="/>
+    <page:list id="pl_g5_ambience_BundleEntity" items="${bundleentitys}" z="HOeUcxO01VQkVblunZkJ1sXU2Og=">
+        <table:table data="${bundleentitys}" id="l_g5_ambience_BundleEntity" path="/bundleentitys" z="nOa8/bwtd26eR+8XTrKBjZtCcUM=">
+            <table:column id="c_g5_ambience_BundleEntity_itemId" property="itemId" z="nsp6EBLK8TEvuhbH1WSjDzQUxEA="/>
+            <table:column id="c_g5_ambience_BundleEntity_username" property="username" z="rpWAez63Wwr7/Dxnjo3UmExheYM="/>
+            <table:column id="c_g5_ambience_BundleEntity_userRating" property="userRating" z="RB/HkqOQ4WVlsWdLvI761r8HMCc="/>
+            <table:column date="true" dateTimePattern="${bundleEntity_returneddate_date_format}" id="c_g5_ambience_BundleEntity_returnedDate" property="returnedDate" z="1GoB1xVXpunvJzQ+l3EcX5fvA/g="/>
         </table:table>
     </page:list>
 </div>

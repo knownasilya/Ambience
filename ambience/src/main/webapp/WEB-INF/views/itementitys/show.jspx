@@ -2,21 +2,21 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_g5_ambience_domain_ItemEntity" object="${itementity}" path="/itementitys" z="bxViNaFugwTk3LkMJZFsswCg36M=">
-        <field:display field="title" id="s_g5_ambience_domain_ItemEntity_title" object="${itementity}" z="L8pXoBC3Fojy9S+42NZAwFX2jjY="/>
-        <field:display date="true" dateTimePattern="${itemEntity_releaseyear_date_format}" field="releaseYear" id="s_g5_ambience_domain_ItemEntity_releaseYear" object="${itementity}" z="28Lj4+nd/GH8/Uea7AUpsAn966w="/>
-        <field:display field="type" id="s_g5_ambience_domain_ItemEntity_type" object="${itementity}" z="1hppNDR1k/4wHRv1SpqllZuSfGk="/>
-        <field:display field="platform" id="s_g5_ambience_domain_ItemEntity_platform" object="${itementity}" z="TUDuK32qTTxx0R5ctK/JAjGbxQ8="/>
-        <field:display field="genre" id="s_g5_ambience_domain_ItemEntity_genre" object="${itementity}" z="7SFQdCe4gw/ghe2A80e73X7pGLw="/>
-        <field:display field="isOut" id="s_g5_ambience_domain_ItemEntity_isOut" object="${itementity}" z="DQoOPgE5jvG1Cd1G6sokxcaU0hk="/>
-        <field:display field="userRating" id="s_g5_ambience_domain_ItemEntity_userRating" object="${itementity}" z="ngQIr4ErffbzGBAG8io0Z+NZWXQ="/>
-        <field:display field="esrbRating" id="s_g5_ambience_domain_ItemEntity_esrbRating" object="${itementity}" z="twdAg3NzgvKNVa75rYE36MV9TQU="/>
-        <field:display field="referenceNumber" id="s_g5_ambience_domain_ItemEntity_referenceNumber" object="${itementity}" z="/cU73mpoA5B9h/UjU2L7s+8VADA="/>
-        <field:display field="director" id="s_g5_ambience_domain_ItemEntity_director" object="${itementity}" z="gkBn8QsjMiCl8IU20waUAxnHw68="/>
-        <field:display field="trailerUrl" id="s_g5_ambience_domain_ItemEntity_trailerUrl" object="${itementity}" z="1bTr/sF8unc79gBrWsoct6z97Dk="/>
-        <field:display field="synopsis" id="s_g5_ambience_domain_ItemEntity_synopsis" object="${itementity}" z="CaYx6HO1A1reO2AG5YnNHBVnrrw="/>
-        <field:display field="imageUrl" id="s_g5_ambience_domain_ItemEntity_imageUrl" object="${itementity}" z="6jdYi7z2s51qjonlt/+AfatUo+A="/>
-        <field:display field="developer" id="s_g5_ambience_domain_ItemEntity_developer" object="${itementity}" z="X2ephJVSV3qobUPaoAUao7lmnXk="/>
-        <field:display field="mpaaRating" id="s_g5_ambience_domain_ItemEntity_mpaaRating" object="${itementity}" z="PRtUFGZX0FtXpNfXdfNt0Zhmj/E="/>
+    <page:show id="ps_g5_ambience_ItemEntity" object="${itementity}" path="/itementitys" z="DWXJLOHNTc9gYgynnz8HeJfJiY4=">
+        <field:display field="title" id="s_g5_ambience_ItemEntity_title" object="${itementity}" z="88GURyYmkyNipRFRjMySLSocEPM="/>
+        <field:display date="true" dateTimePattern="${itemEntity_releaseyear_date_format}" field="releaseYear" id="s_g5_ambience_ItemEntity_releaseYear" object="${itementity}" z="g1oFVIxRkWkYkvMriq42dl9al3w="/>
+        <field:display field="type" id="s_g5_ambience_ItemEntity_type" object="${itementity}" z="RWnu8gLTjr9ARim2ZZ5W93p5+j4="/>
+        <field:display field="platform" id="s_g5_ambience_ItemEntity_platform" object="${itementity}" z="2BgzUQCpMBKCRyYWJwOWw4dlUhQ="/>
+        <field:display field="genre" id="s_g5_ambience_ItemEntity_genre" object="${itementity}" z="nVbzFddHyiakorjs212p+clSOQo="/>
+        <field:display field="isOut" id="s_g5_ambience_ItemEntity_isOut" object="${itementity}" z="p1pit8/c9Izg9MXLYfT7wNi34Aw="/>
+        <field:display field="userRating" id="s_g5_ambience_ItemEntity_userRating" object="${itementity}" z="516ESMW5xcX39KGU0Xvl1ca+NiI="/>
+        <field:display field="esrbRating" id="s_g5_ambience_ItemEntity_esrbRating" object="${itementity}" z="/hO4K4rM6vTTvZBWespgFcq6If4="/>
+        <field:display field="referenceNumber" id="s_g5_ambience_ItemEntity_referenceNumber" object="${itementity}" z="fTb/oo247KUj5lAUFf5dompG42E="/>
+        <field:display field="director" id="s_g5_ambience_ItemEntity_director" object="${itementity}" z="q6Ugvxby+n6o0mQUfNGkJkGhL2Y="/>
+        <field:display field="trailerUrl" id="s_g5_ambience_ItemEntity_trailerUrl" object="${itementity}" z="P9VzyAZ4vmnlstBUGWH52N8xiYM="/>
+        <field:display field="synopsis" id="s_g5_ambience_ItemEntity_synopsis" object="${itementity}" z="J3i4XKW0r0U4VrTF8JVbdkRiz2o="/>
+        <field:display field="imageUrl" id="s_g5_ambience_ItemEntity_imageUrl" object="${itementity}" z="aDVizl32yA7g8qJIaCFPPIpMflg="/>
+        <field:display field="developer" id="s_g5_ambience_ItemEntity_developer" object="${itementity}" z="Rrf/TDv55BJuQorwGO9pj2ysJnA="/>
+        <field:display field="mpaaRating" id="s_g5_ambience_ItemEntity_mpaaRating" object="${itementity}" z="YE/HP0nVcCj3v6ci+FlMpPYxBZc="/>
     </page:show>
 </div>
