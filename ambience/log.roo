@@ -14,3 +14,5 @@ quit
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-04-23 20:21:34
 web mvc finder all
 finder list --class ~.domain.UserEntity
+quit
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-04-23 22:06:14
