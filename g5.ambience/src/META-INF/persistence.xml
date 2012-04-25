@@ -1,20 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-	<persistence-unit name="g5.ambience" transaction-type="RESOURCE_LOCAL">
-		<provider>EclipseLink 2.3</provider>
-		<class>g5.ambience.user.admin.model.Admin</class>
-		<class>g5.ambience.user.member.model.Member</class>
-		<class>g5.ambience.item.model.Item</class>
-		<class>g5.ambience.item.model.Member_has_Item</class>
-		<class>g5.ambience.item.model.Member_has_ItemPK</class>
-		<class>g5.ambience.user.model.User</class>
-		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Ambience"/>
-			<property name="javax.persistence.jdbc.user" value="root"/>
-			<property name="javax.persistence.jdbc.password" value="password"/>
-			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-			<property name="eclipselink.ddl-generation.output-mode" value="both"/>
-			<property name="eclipselink.ddl-generation" value="create-tables"/>
-		</properties>
+	<persistence-unit name="g5.ambience">
+		<class>g5.ambience.model.BundleEntity</class>
+		<class>g5.ambience.model.BundleEntityPK</class>
+		<class>g5.ambience.model.ItemEntity</class>
+		<class>g5.ambience.model.UserEntity</class>
 	</persistence-unit>
 </persistence>

@@ -1,6 +1,4 @@
-package g5.ambience.item.model;
-
-import g5.ambience.user.model.User;
+package g5.ambience.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -8,16 +6,16 @@ import java.util.Date;
 
 
 /**
- * The persistent class for the Member_has_Item database table.
+ * The persistent class for the BundleEntity database table.
  * 
  */
 @Entity
-@Table(name="Member_has_Item")
-public class Member_has_Item implements Serializable {
+@Table(name="BundleEntity")
+public class BundleEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private Member_has_ItemPK id;
+	private BundleEntityPK id;
 
     @Temporal( TemporalType.TIMESTAMP)
 	@Column(name="returned_date")
@@ -26,24 +24,24 @@ public class Member_has_Item implements Serializable {
 	@Column(name="user_rating")
 	private int userRating;
 
-	//bi-directional many-to-one association to Item
+	//bi-directional many-to-one association to ItemEntity
     @ManyToOne
 	@JoinColumn(name="item_id", nullable=false, insertable=false, updatable=false)
-	private Item item;
+	private ItemEntity itemEntity;
 
-	//bi-directional many-to-one association to User
+	//bi-directional many-to-one association to UserEntity
     @ManyToOne
 	@JoinColumn(name="username", nullable=false, insertable=false, updatable=false)
-	private User user;
+	private UserEntity userEntity;
 
-    public Member_has_Item() {
+    public BundleEntity() {
     }
 
-	public Member_has_ItemPK getId() {
+	public BundleEntityPK getId() {
 		return this.id;
 	}
 
-	public void setId(Member_has_ItemPK id) {
+	public void setId(BundleEntityPK id) {
 		this.id = id;
 	}
 	
@@ -63,20 +61,20 @@ public class Member_has_Item implements Serializable {
 		this.userRating = userRating;
 	}
 
-	public Item getItem() {
-		return this.item;
+	public ItemEntity getItemEntity() {
+		return this.itemEntity;
 	}
 
-	public void setItem(Item item) {
-		this.item = item;
+	public void setItemEntity(ItemEntity itemEntity) {
+		this.itemEntity = itemEntity;
 	}
 	
-	public User getUser() {
-		return this.user;
+	public UserEntity getUserEntity() {
+		return this.userEntity;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserEntity(UserEntity userEntity) {
+		this.userEntity = userEntity;
 	}
 	
 }

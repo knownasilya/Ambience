@@ -4,25 +4,46 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html">
     <h:head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-		<title>Login</title>
-		<h:outputStylesheet library="css" name="style.css" type="text/css"/>
-		<f:loadBundle basename="g5.ambience.user.model.messages" var="msg"/>
-	</h:head>
-	<h:body>
-		<h:form>
-			<h:outputLabel value="#{msg.username}" for="username"></h:outputLabel>
-			<h:inputText value="#{userView.username}" id="username"></h:inputText>
-			<h:outputLabel value="#{msg.password}" for="password"></h:outputLabel>
-            <h:inputSecret value="#{userView.password}" id="password"/>
-			<h:commandButton value="orders"
-                       type="submit"
-                       actionListener="#{userView.userLogin}">
-                <f:facet name="extraParameter">
-                    <f:param name="loginUsernameParam" value="#{userView.username}"/>
-                    <f:param name="loginPasswordParam" value="#{userView.password}"/>
-                </f:facet>
-            </h:commandButton>
-		</h:form>
-	</h:body>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+        <title>Login</title>
+        <h:outputStylesheet library="css" name="style.css" type="text/css"/>
+        <!--<f:loadBundle basename="g5.ambience.user.model.messages" var="msg"/>-->
+    </h:head>
+    <h:body>
+        <f:view>
+	    <header>
+	        <h1>Ambience</h1>
+	        <h2>Media Rental App</h2>
+	        <span class="welcome">
+	          Welcome <h:link value="#{userController.firstName}" outcome="profile"/>
+	          <a class="btn login" href="login.html">Login</a>
+	          <a class="btn register" href="register.html">Register</a>
+	        </span>
+	      </header>
+	      
+	      <nav id="primary">
+	        <a href="#">Home</a>
+	        <a href="#">Movies</a>
+	        <a href="#">Games</a>
+	        <a href="#">Membership</a>
+	        <a href="#">Register</a>
+	        <a href="#">About</a>       
+	      </nav>      
+        
+	        <h:form>
+	            <h:outputLabel value="#{msg.username}" for="username"></h:outputLabel>
+	            <h:inputText value="#{userController.username}" id="username"></h:inputText>
+	            <h:outputLabel value="#{msg.password}" for="password"></h:outputLabel>
+	            <h:inputSecret value="#{userController.password}" id="password"/>
+	            <h:commandButton value="login"
+	                       type="submit"
+	                       actionListener="#{userController.login}">
+	                <f:facet name="extraParameter">
+	                    <f:param name="loginUsernameParam" value="#{userController.username}"/>
+	                    <f:param name="loginPasswordParam" value="#{userController.password}"/>
+	                </f:facet>
+	            </h:commandButton>
+	        </h:form>
+        </f:view>
+    </h:body>
 </html>

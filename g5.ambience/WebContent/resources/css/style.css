@@ -1,0 +1,62 @@
+ * {
+    padding:0;
+    margin:0;
+  }
+  
+  body {
+    font-size:16px;
+    padding:4em;
+  }
+  
+  span.welcome {
+    line-height:3.5em;
+    display:inline-block;
+    float:right;
+  }
+  
+  header h1, header h2 {
+    display:inline-block;
+  }
+  
+  header h2 {
+    font-size:1.2em;
+  }
+  
+  a.btn {
+    padding:0.2em 0.5em 0.2em 0.5em;
+    background-color:#ccc;
+    color:#fff;
+    border:1px solid #333;
+    margin:0.4em;
+    font-weight:bold;
+    text-decoration: none;
+    -moz-border-radius:0.3em;
+    -webkit-border-radius:0.3em;
+    border-radius:0.3em;
+  }
+  
+  a.btn:hover {
+    background-color:#eee;
+    opacity:0.55;
+  }
+  
+  a.btn.login {
+    background-color: blue;
+  }
+  
+  a.btn.register {
+    background-color: green;
+  }
+  
+  nav {
+    margin-top:2em;
+  }
+  
+  nav a {
+    font-size:1.2em;
+    padding:0.2em 0.5em;
+  }
+  
+  nav a:first-child {
+    padding-left:0;
+  }

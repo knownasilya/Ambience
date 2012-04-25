@@ -1,28 +1,28 @@
-package g5.ambience.item.model;
+package g5.ambience.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
 /**
- * The primary key class for the Member_has_Item database table.
+ * The primary key class for the BundleEntity database table.
  * 
  */
 @Embeddable
-public class Member_has_ItemPK implements Serializable {
+public class BundleEntityPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="item_id", unique=true, nullable=false)
 	private int itemId;
 
-    @Temporal( TemporalType.TIMESTAMP)
+    @Temporal( TemporalType.DATE)
 	@Column(name="checked_out_date", unique=true, nullable=false)
 	private java.util.Date checkedOutDate;
 
 	@Column(unique=true, nullable=false, length=45)
 	private String username;
 
-    public Member_has_ItemPK() {
+    public BundleEntityPK() {
     }
 	public int getItemId() {
 		return this.itemId;
@@ -47,10 +47,10 @@ public class Member_has_ItemPK implements Serializable {
 		if (this == other) {
 			return true;
 		}
-		if (!(other instanceof Member_has_ItemPK)) {
+		if (!(other instanceof BundleEntityPK)) {
 			return false;
 		}
-		Member_has_ItemPK castOther = (Member_has_ItemPK)other;
+		BundleEntityPK castOther = (BundleEntityPK)other;
 		return 
 			(this.itemId == castOther.itemId)
 			&& this.checkedOutDate.equals(castOther.checkedOutDate)

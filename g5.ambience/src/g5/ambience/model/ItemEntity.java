@@ -1,6 +1,4 @@
-package g5.ambience.item.model;
-
-import g5.ambience.user.model.User;
+package g5.ambience.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -9,16 +7,16 @@ import java.util.Set;
 
 
 /**
- * The persistent class for the Item database table.
+ * The persistent class for the ItemEntity database table.
  * 
  */
 @Entity
-@Table(name="Item")
-public class Item implements Serializable {
+@Table(name="ItemEntity")
+public class ItemEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="item_id", unique=true, nullable=false)
 	private int itemId;
 
@@ -68,22 +66,12 @@ public class Item implements Serializable {
 	@Column(name="user_rating")
 	private int userRating;
 
-	//bi-directional many-to-many association to User
-    @ManyToMany
-	@JoinTable(
-		name="Member_has_Item"
-		, joinColumns={
-			@JoinColumn(name="item_id", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="username", nullable=false)
-			}
-		)
-	private Set<User> users;
+	//bi-directional many-to-one association to BundleEntity
+	@OneToMany(mappedBy="itemEntity")
+	private Set<BundleEntity> bundleEntities;
 
-	//bi-directional many-to-one association to Member_has_Item
-	@OneToMany(mappedBy="item")
-	private Set<Member_has_Item> memberHasItems;
+    public ItemEntity() {
+    }
 
 	public int getItemId() {
 		return this.itemId;
@@ -213,20 +201,12 @@ public class Item implements Serializable {
 		this.userRating = userRating;
 	}
 
-	public Set<User> getUsers() {
-		return this.users;
+	public Set<BundleEntity> getBundleEntities() {
+		return this.bundleEntities;
 	}
 
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
-	
-	public Set<Member_has_Item> getMemberHasItems() {
-		return this.memberHasItems;
-	}
-
-	public void setMemberHasItems(Set<Member_has_Item> memberHasItems) {
-		this.memberHasItems = memberHasItems;
+	public void setBundleEntities(Set<BundleEntity> bundleEntities) {
+		this.bundleEntities = bundleEntities;
 	}
 	
 }
