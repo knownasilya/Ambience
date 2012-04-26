@@ -6,6 +6,7 @@ package g5.ambience.controller;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import g5.ambience.model.UserEntity;
@@ -31,6 +32,14 @@ public class UserController {
 	
 	FacesMessage fm;
 	
+	public UserController(){
+		if (em == null) {
+            em = (EntityManager) Persistence.
+                      createEntityManagerFactory("g5.ambience").
+                      createEntityManager();
+        }
+	}
+	
 	private UserEntity getUserByUsernameAndPassword(String username, String password){
 		try{
 			UserEntity user = em.find(UserEntity.class, username);
@@ -45,7 +54,9 @@ public class UserController {
 	
 	private void createUser(String username, String password, String email, String firstName, String lastName){
 		UserEntity user = new UserEntity(username, password, email, firstName, lastName);
+		em.getTransaction().begin();
 		em.persist(user);
+		em.getTransaction().commit();
 	}
 	
 	public void registerUser(){

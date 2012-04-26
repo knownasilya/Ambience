@@ -64,11 +64,11 @@ public class UserEntityTest {
 	@Test
 	public void testUserEntity() {	
 		em.getTransaction().begin();
-        UserEntity user = new UserEntity();
-        user.setUsername("user");
-        user.setPasswordHash("pass");
-        user.setEmail("email@");        
-        em.persist(user);
+        UserEntity user1 = new UserEntity();
+        user1.setUsername("user");
+        user1.setPasswordHash("pass");
+        user1.setEmail("email@");        
+        em.persist(user1);
         em.flush();
         em.getTransaction().commit(); 
 	}
@@ -79,10 +79,21 @@ public class UserEntityTest {
 	@Test
 	public void testUserEntityStringStringStringStringString() {
 		em.getTransaction().begin();
-		UserEntity user = new UserEntity("admin","password","email","first","last");
-        em.persist(user);
+		UserEntity user2 = new UserEntity("admin","password","email","first","last");
+        em.persist(user2);
         em.flush();
         em.getTransaction().commit();
+	}
+	
+	@Test
+	public void testUserAll(){
+		em.getTransaction().begin();
+		UserEntity user1 = em.find(UserEntity.class, "user");
+		UserEntity user2 = em.find(UserEntity.class, "admin");
+		em.remove(user1);
+		em.remove(user2);
+		em.getTransaction().commit();
+		
 	}
 
 	/**
