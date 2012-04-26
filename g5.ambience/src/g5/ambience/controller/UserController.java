@@ -3,6 +3,7 @@
  */
 package g5.ambience.controller;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,6 +27,10 @@ public class UserController {
 	@PersistenceContext(unitName="g5.ambience")
 	EntityManager em;
 	
+	FacesContext fc;
+	
+	FacesMessage fm;
+	
 	private UserEntity getUserByUsernameAndPassword(String username, String password){
 		try{
 			UserEntity user = em.find(UserEntity.class, username);
@@ -45,6 +50,16 @@ public class UserController {
 	
 	public void registerUser(){
 		
+	}
+	
+	public String login(){
+		if(getUserByUsernameAndPassword(this.getUsername(), this.getPassword()) != null){
+			return "profile";
+		}
+		else {
+			fm.setSummary("Try Again!");
+		}
+		return "";
 	}
 
 	/**

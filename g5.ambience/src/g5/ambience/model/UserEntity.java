@@ -16,7 +16,6 @@ public class UserEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(unique=true, nullable=false, length=45)
 	private String username;
 
@@ -79,12 +78,12 @@ public class UserEntity implements Serializable {
     }
     
     public UserEntity(String username, String password, String email, String firstName, String lastName){
-    	setUsername(username);
+    	this.username = username;
     	//Hash the password first
-    	setPasswordHash(password);
-    	setEmail(email);
-    	setFirstName(firstName);
-    	setLastName(lastName);
+    	this.passwordHash = password;
+    	this.email = email;
+    	this.firstName = firstName;
+    	this.lastName = lastName;
     }
 
 	public String getUsername() {

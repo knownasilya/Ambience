@@ -24,21 +24,27 @@ public class BundleEntityPK implements Serializable {
 
     public BundleEntityPK() {
     }
+    
 	public int getItemId() {
 		return this.itemId;
 	}
+	
 	public void setItemId(int itemId) {
 		this.itemId = itemId;
 	}
+	
 	public java.util.Date getCheckedOutDate() {
 		return this.checkedOutDate;
 	}
+	
 	public void setCheckedOutDate(java.util.Date checkedOutDate) {
 		this.checkedOutDate = checkedOutDate;
 	}
+	
 	public String getUsername() {
 		return this.username;
 	}
+	
 	public void setUsername(String username) {
 		this.username = username;
 	}
