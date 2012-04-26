@@ -2,7 +2,8 @@
 <html lang="en"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:h="http://java.sun.com/jsf/html">
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
         <title>Login</title>
@@ -35,14 +36,7 @@
 	            <h:inputText value="#{userController.username}" id="username"></h:inputText>
 	            <h:outputLabel value="#{msg.password}" for="password"></h:outputLabel>
 	            <h:inputSecret value="#{userController.password}" id="password"/>
-	            <h:commandButton value="login"
-	                       type="submit"
-	                       actionListener="#{userController.login}">
-	                <f:facet name="extraParameter">
-	                    <f:param name="loginUsernameParam" value="#{userController.username}"/>
-	                    <f:param name="loginPasswordParam" value="#{userController.password}"/>
-	                </f:facet>
-	            </h:commandButton>
+	            <h:commandButton value="login" action="#{userController.login}" type="submit"/>     
 	        </h:form>
         </f:view>
     </h:body>
