@@ -25,6 +25,7 @@ public class UserController {
 	private String lastName;
 	private String email;
 
+
 	
 
 	@PersistenceContext(unitName="g5.ambience")
@@ -39,6 +40,7 @@ public class UserController {
 			em = (EntityManager) Persistence.createEntityManagerFactory("g5.ambience").createEntityManager();
 		}		
 	}
+
 	
 	private UserEntity getUserByUsernameAndPassword(String username, String password){		
 		try{
