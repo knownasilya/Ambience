@@ -33,30 +33,36 @@ public class UserController {
 	FacesMessage fm;
 	
 	public UserController(){
-		if (em == null) {
-            em = (EntityManager) Persistence.
-                      createEntityManagerFactory("g5.ambience").
-                      createEntityManager();
-        }
+		if(em == null){
+			em = (EntityManager) Persistence.createEntityManagerFactory("g5.ambience").createEntityManager();
+		}		
 	}
 	
-	private UserEntity getUserByUsernameAndPassword(String username, String password){
+	private UserEntity getUserByUsernameAndPassword(String username, String password){		
 		try{
 			UserEntity user = em.find(UserEntity.class, username);
 			if(user.getPasswordHash().equals(password)){
 				return user;
 			}
 		} finally {
-			em.close();
 		}
 		return null;
 	}
 	
 	private void createUser(String username, String password, String email, String firstName, String lastName){
-		UserEntity user = new UserEntity(username, password, email, firstName, lastName);
-		em.getTransaction().begin();
-		em.persist(user);
-		em.getTransaction().commit();
+		if (em == null) {
+            em = (EntityManager) Persistence.
+                      createEntityManagerFactory("g5.ambience").
+                      createEntityManager();
+        }
+		try {
+			UserEntity user = new UserEntity(username, password, email, firstName, lastName);
+			em.getTransaction().begin();
+			em.persist(user);
+			em.getTransaction().commit();
+		} finally {
+			em.close();
+		}
 	}
 	
 	public void registerUser(){
@@ -64,13 +70,23 @@ public class UserController {
 	}
 	
 	public String login(){
-		if(getUserByUsernameAndPassword(this.getUsername(), this.getPassword()) != null){
-			return "profile";
+		try{
+			if(getUserByUsernameAndPassword(this.getUsername(), this.getPassword()) != null){
+				if(getUserByUsernameAndPassword(username, password).getRole().equals("admin")){
+					return "dashboard";
+				} else if(getUserByUsernameAndPassword(username, password).getRole().equals("member")) {
+					return "profile";
+				} else {
+					return "login";
+				}			
+			}
+			else {
+				fm.setSummary("Try Again!");
+			}
+		} catch(NullPointerException e) {
+			e.getMessage();
 		}
-		else {
-			fm.setSummary("Try Again!");
-		}
-		return "";
+		return "index";
 	}
 
 	/**
