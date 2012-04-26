@@ -60,3 +60,14 @@
   nav a:first-child {
     padding-left:0;
   }
+  
+  #javax_faces_developmentstage_messages {
+    list-style-type:none;
+    padding:0.2em 0.5em 0.2em 0.8em;
+    color:green;
+  }
+  
+  #login_cont input {
+    padding:0.2em;
+    clear:both;
+  }
