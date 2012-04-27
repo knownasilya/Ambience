@@ -6,6 +6,7 @@ package g5.ambience.controller;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
@@ -53,9 +54,9 @@ public class UserController {
 		return null;
 	}
 	
-	private void createUser(String username, String password, String email, String firstName, String lastName){
+	private void createUser(String username, String password, String email, String firstName, String lastName, String role){
 		try {
-			UserEntity user = new UserEntity(username, password, email, firstName, lastName);
+			UserEntity user = new UserEntity(username, password, email, firstName, lastName, role);
 			em.getTransaction().begin();
 			em.persist(user);
 			em.getTransaction().commit();
@@ -64,7 +65,7 @@ public class UserController {
 	}
 	
 	public String registerUser(){
-		createUser(this.username, this.password, this.email, this.firstName, this.lastName);
+		createUser(this.username, this.password, this.email, this.firstName, this.lastName, "member");
 		return "profile";
 	}
 	
@@ -75,7 +76,8 @@ public class UserController {
 					return "dashboard";
 				} else if(getUserByUsernameAndPassword(username, password).getRole().equals("member")) {
 					return "profile";
-				} 
+				}
+				
 			} else {				
 				// Actually this goes off if the username is correct, but the password is not.
 				// The message is the same for security reasons.			
@@ -90,6 +92,9 @@ public class UserController {
 	
 	public void message(String message, String id){
 		FacesContext facesContext = FacesContext.getCurrentInstance();
+		Flash flash = facesContext.getExternalContext().getFlash();
+		flash.setKeepMessages(false);
+		
 		FacesMessage facesMessage = new FacesMessage(message);
 		facesContext.addMessage(id, facesMessage);
 	}

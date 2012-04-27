@@ -77,13 +77,14 @@ public class UserEntity implements Serializable {
     public UserEntity() {
     }
     
-    public UserEntity(String username, String password, String email, String firstName, String lastName){
+    public UserEntity(String username, String password, String email, String firstName, String lastName, String role){
     	this.username = username;
     	//Hash the password first
     	this.passwordHash = password;
     	this.email = email;
     	this.firstName = firstName;
     	this.lastName = lastName;
+    	this.role = role;
     }
 
 	public String getUsername() {

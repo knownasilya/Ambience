@@ -79,7 +79,7 @@ public class UserEntityTest {
 	@Test
 	public void testUserEntityStringStringStringStringString() {
 		em.getTransaction().begin();
-		UserEntity user2 = new UserEntity("admin","password","email","first","last");
+		UserEntity user2 = new UserEntity("admin","password","email","first","last","member");
         em.persist(user2);
         em.flush();
         em.getTransaction().commit();

@@ -6,7 +6,7 @@
     xmlns:c="http://java.sun.com/jsp/jstl/core">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-        <title>Index</title>
+        <title>Movies</title>
         <h:outputStylesheet library="css" name="style.css" type="text/css"/>
         <h:outputStylesheet library="css" name="colorbox.css" type="text/css"/>
         <h:outputScript library="js" name="jquery.colorbox.js" target="head"/>
@@ -37,40 +37,48 @@
     </h:head>
     <h:body>
         <f:view>
-	    <header>
-	        <h1>Ambience</h1>
-	        <h2>Media Rental App</h2>
-	        <span class="welcome">
-	          Welcome<h:link value="#{userController.firstName}" outcome="profile"/>
-	          <a class="btn login" href="#login_cont">Login</a>
-	          <a class="btn register" href="#register_cont">Register</a>
-	        </span>
-	      </header>
-	      
-	      <nav id="primary">
-	        <a href="#">Home</a>
-	        <a href="#">Movies</a>
-	        <a href="#">Games</a>
-	        <a href="#">Membership</a>
-	        <a href="#">Register</a>
-	        <a href="#">About</a>       
-	      </nav>      
+        <header>
+            <h1>Ambience</h1>
+            <h2>Media Rental App</h2>
+            <span class="welcome">
+              Welcome<h:link value="#{userController.firstName}" outcome="profile"/>
+              <a class="btn login" href="#login_cont">Login</a>
+              <a class="btn register" href="#register_cont">Register</a>
+            </span>
+          </header>
+          
+          <nav id="primary">
+            <a href="#">Home</a>
+            <a href="#">*Movies*</a>
+            <a href="#">Games</a>
+            <a href="#">Membership</a>
+            <a href="#">Register</a>
+            <a href="#">About</a>       
+          </nav>      
+          
+          <section>
+            <h:datatable value="#{itemController.allItems}" var="item">  
+			    <h:column>  
+			         <h:outputText value="#{item}" />  
+			    </h:column>  
+			</h:datable> 
+          </section>
         
-	        
-	        <div style='display:none'>
-	            <div id='login_cont' style='padding:10px; background:#fff;'>
-	               <p><strong>User Login Form</strong></p>
-	               <h:form id="login_form">
-		                <h:outputLabel value="Username" for="username"></h:outputLabel>
-		                <h:inputText value="#{userController.username}" id="username"></h:inputText><br/>
-		                <h:outputLabel value="Password" for="password"></h:outputLabel>
-		                <h:inputSecret value="#{userController.password}" id="password"/><br/>
-		                <h:commandButton id="login_btn" value="Login" action="#{userController.login}"/> 
-		                <h:message id="error" for="login_btn"/>                 
-		            </h:form>	
-	            </div>
-	            
-	            <div id='register_cont' style='padding:10px; background:#fff;'>
+            
+            <div style='display:none'>
+                <div id='login_cont' style='padding:10px; background:#fff;'>
+                   <p><strong>User Login Form</strong></p>
+                   <h:form id="login_form">
+                        <h:outputLabel value="Username" for="username"></h:outputLabel>
+                        <h:inputText value="#{userController.username}" id="username"></h:inputText><br/>
+                        <h:outputLabel value="Password" for="password"></h:outputLabel>
+                        <h:inputSecret value="#{userController.password}" id="password"/><br/>
+                        <h:commandButton id="login_btn" value="Login" action="#{userController.login}"/> 
+                        <h:message id="error" for="login_btn"/>                 
+                    </h:form>   
+                </div>
+                
+                <div id='register_cont' style='padding:10px; background:#fff;'>
                    <p><strong>Registration Form</strong></p>
                    <h:form id="register_form">
                         <h:outputLabel value="Username" for="username"/>
@@ -95,7 +103,5 @@
             </div>
 
         </f:view>
-        
-
-    </h:body>
+    </h:body>   
 </html>

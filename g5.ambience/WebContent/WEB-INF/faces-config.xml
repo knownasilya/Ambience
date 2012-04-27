@@ -10,5 +10,10 @@
 		<managed-bean-class>g5.ambience.controller.UserController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>itemController</managed-bean-name>
+		<managed-bean-class>g5.ambience.controller.ItemController</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
 
 </faces-config>
