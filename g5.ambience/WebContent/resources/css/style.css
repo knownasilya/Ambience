@@ -61,6 +61,13 @@
     padding-left:0;
   }
   
+  
+  
+  /*MAIN*/
+  #main {
+    padding:2em 0;
+  }
+  
   #javax_faces_developmentstage_messages {
     list-style-type:none;
     padding:0.2em 0.5em 0.2em 0.8em;
@@ -71,3 +78,36 @@
     padding:0.2em;
     clear:both;
   }
+  
+  header.itemview {
+    width:50%;
+    margin-top:1em;
+  }
+  
+  header.itemview h1 {
+    font-size:1em;
+    display:inline-block;
+    padding: 0.5em 0;
+  }
+  
+  img.itemview {
+    clear:left;
+    display:block;
+    width:100%;
+  }
+  
+  .info {
+    width:35%;
+    padding:0.8em;
+    border:1px solid #999;
+  }
+  
+  .info span {
+    margin-top:2.9em;
+    display:inline-block;
+    float:right;
+    width:45%;
+    padding-left:1em;
+  }
+  
+  

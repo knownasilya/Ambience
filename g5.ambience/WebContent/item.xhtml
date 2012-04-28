@@ -49,24 +49,39 @@
           
           <nav id="primary">
             <h:link value="Home" outcome="index"/>
-            <a href="#">*Movies*</a>
+            <a href="#">Movies</a>
             <a href="#">Games</a>
             <a href="#">Membership</a>
             <a href="#">Register</a>
             <a href="#">About</a>       
-          </nav>      
+          </nav>
           
-          <section>
-            <h:form>
-	            <h:dataTable value="#{itemController.allItems}" var="i">
-				    <h:column>  
-				        <img src="#{i.imageUrl}" width="70px" height="95px"/><br/>
-				        <h:commandLink value="#{i.title}" action="#{itemController.item}">
-				             <f:setPropertyActionListener target="#{itemController.selectedItem}" value="#{i}" />
-				        </h:commandLink>
-				    </h:column> 
-				</h:dataTable> 
-			</h:form>
+          <section id="main">
+          
+           <div class="info">
+                <h:form>
+                     <h:commandLink value="Add to Bundle" action="#{itemController.addToBundle}"/>
+                </h:form>           
+                <span>
+                    <h:outputText value="Type: #{itemController.selectedItem.type}"/><br/>
+                    <h:outputText value="Platform: #{itemController.selectedItem.platform}"/><br/>
+                    <h:outputText value="Genre: #{itemController.selectedItem.genre}"/><br/><br/>
+                    <h:outputText value="ESRB Rating: #{itemController.selectedItem.esrbRating}"/><br/><br/>
+                    <h:outputText value="Developer: #{itemController.selectedItem.developer}"/><br/>
+                    <h:outputText value="Released: #{itemController.selectedItem.releaseYear}"/>
+                </span>
+                
+	            <header class="itemview">
+	                <h1>
+	                    <h:outputText value="#{itemController.selectedItem.title}"/>
+	                </h1>
+	                <IMG class="itemview" alt="#{itemController.selectedItem.title} image" src="#{itemController.selectedItem.imageUrl}" />
+	            </header>
+            
+                
+            </div>
+
+            
 				
           </section>
         

@@ -47,9 +47,8 @@ public class ItemEntity implements Serializable {
 	@Column(name="reference_number", nullable=false)
 	private int referenceNumber;
 
-    @Temporal( TemporalType.DATE)
 	@Column(name="release_year", nullable=false)
-	private Date releaseYear;
+	private int releaseYear;
 
 	@Column(nullable=false, length=500)
 	private String synopsis;
@@ -153,11 +152,11 @@ public class ItemEntity implements Serializable {
 		this.referenceNumber = referenceNumber;
 	}
 
-	public Date getReleaseYear() {
+	public int getReleaseYear() {
 		return this.releaseYear;
 	}
 
-	public void setReleaseYear(Date releaseYear) {
+	public void setReleaseYear(int releaseYear) {
 		this.releaseYear = releaseYear;
 	}
 

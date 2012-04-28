@@ -3,6 +3,8 @@
  */
 package g5.ambience.controller;
 
+import java.util.Set;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -11,6 +13,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
+import g5.ambience.model.BundleEntity;
+import g5.ambience.model.ItemEntity;
 import g5.ambience.model.UserEntity;
 
 
@@ -25,6 +29,7 @@ public class UserController {
 	private String firstName;
 	private String lastName;
 	private String email;
+	private Set<BundleEntity> bundleEntities;
 
 
 	
@@ -88,6 +93,26 @@ public class UserController {
 			e.getMessage();			
 		}
 		return null;
+	}
+	
+	public void addItemToBundle(ItemEntity item){
+		try {
+			UserEntity user = em.find(UserEntity.class, username);
+			BundleEntity bundle = new BundleEntity();
+			bundle.setItemEntity(item);
+			bundle.setUserEntity(user);
+			Set<BundleEntity> bundles = null;
+			bundles.add(bundle);
+			user.setBundleEntities(bundles);
+			em.getTransaction().begin();
+			em.merge(user);
+			em.getTransaction().commit();
+		} finally {
+		}
+	}
+	
+	public void findItemsInBundle() {
+		
 	}
 	
 	public void message(String message, String id){
@@ -167,6 +192,22 @@ public class UserController {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+
+	/**
+	 * @return the bundleEntities
+	 */
+	public Set<BundleEntity> getBundleEntities() {
+		return bundleEntities;
+	}
+
+
+	/**
+	 * @param bundleEntities the bundleEntities to set
+	 */
+	public void setBundleEntities(Set<BundleEntity> bundleEntities) {
+		this.bundleEntities = bundleEntities;
 	}
 
 }

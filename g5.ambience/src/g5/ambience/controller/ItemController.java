@@ -5,12 +5,15 @@ package g5.ambience.controller;
 
 import g5.ambience.model.BundleEntity;
 import g5.ambience.model.ItemEntity;
+import g5.ambience.model.UserEntity;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
@@ -33,7 +36,7 @@ public class ItemController {
 	private String mpaaRating;
 	private String platform;
 	private int referenceNumber;
-	private Date releaseYear;
+	private int releaseYear;
 	private String synopsis;
 	private String title;
 	private String trailerUrl;
@@ -42,6 +45,8 @@ public class ItemController {
 	private Set<BundleEntity> bundleEntities;
 	private List<ItemEntity> allItems;
 	private List<ItemEntity> nMovies;
+	private ItemEntity selectedItem;
+	private UserEntity currentUser;
 	
 	
 	
@@ -60,9 +65,34 @@ public class ItemController {
 	}
 	
 	public List<ItemEntity> findNUniqueItemsByType(int max, String type){
-		TypedQuery<ItemEntity> query = em.createQuery("SELECT o FROM ItemEntity o WHERE o.type = :type GROUP BY o.referenceNumber", ItemEntity.class);
+		TypedQuery<ItemEntity> query = em.createQuery("SELECT o FROM ItemEntity o WHERE o.type = :type", ItemEntity.class);
 		query.setParameter("type", type).setMaxResults(max);
 		return (List<ItemEntity>)query.getResultList();
+	}
+	
+	public void addItemToBundle(ItemEntity item){
+		try {
+			UserEntity user = em.find(UserEntity.class, currentUser.getUsername());
+			BundleEntity bundle = new BundleEntity();
+			bundle.setItemEntity(item);
+			bundle.setUserEntity(user);
+			Set<BundleEntity> bundles = null;
+			bundles.add(bundle);
+			user.setBundleEntities(bundles);
+			em.getTransaction().begin();
+			em.merge(user);
+			em.getTransaction().commit();
+		} finally {
+		}
+	}
+	
+	public String addToBundle(){		
+		addItemToBundle(selectedItem);
+		return null;
+	}
+	
+	public String item(){
+		return "item";
 	}
 
 	/**
@@ -208,14 +238,14 @@ public class ItemController {
 	/**
 	 * @return the releaseYear
 	 */
-	public Date getReleaseYear() {
+	public int getReleaseYear() {
 		return releaseYear;
 	}
 
 	/**
 	 * @param releaseYear the releaseYear to set
 	 */
-	public void setReleaseYear(Date releaseYear) {
+	public void setReleaseYear(int releaseYear) {
 		this.releaseYear = releaseYear;
 	}
 
@@ -329,6 +359,34 @@ public class ItemController {
 	 */
 	public void setnMovies(List<ItemEntity> nMovies) {
 		this.nMovies = nMovies;
+	}
+
+	/**
+	 * @return the selectedItem
+	 */
+	public ItemEntity getSelectedItem() {
+		return selectedItem;
+	}
+
+	/**
+	 * @param selectedItem the selectedItem to set
+	 */
+	public void setSelectedItem(ItemEntity selectedItem) {
+		this.selectedItem = selectedItem;
+	}
+
+	/**
+	 * @return the currentUser
+	 */
+	public UserEntity getCurrentUser() {
+		return currentUser;
+	}
+
+	/**
+	 * @param currentUser the currentUser to set
+	 */
+	public void setCurrentUser(UserEntity currentUser) {
+		this.currentUser = currentUser;
 	}
 	
 

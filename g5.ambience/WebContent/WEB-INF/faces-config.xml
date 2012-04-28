@@ -15,5 +15,15 @@
 		<managed-bean-class>g5.ambience.controller.ItemController</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
+	<navigation-rule>
+		<display-name>movies.xhtml</display-name>
+		<from-view-id>/movies.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{itemController.item}</from-action>
+			<from-outcome>item</from-outcome>
+			<to-view-id>/item.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
 
 </faces-config>
