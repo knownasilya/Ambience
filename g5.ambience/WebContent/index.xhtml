@@ -49,12 +49,24 @@
 	      
 	      <nav id="primary">
 	        <a href="#">Home</a>
-	        <a href="#">Movies</a>
+	        <h:link value="Movies" outcome="movies"/>
 	        <a href="#">Games</a>
 	        <a href="#">Membership</a>
 	        <a href="#">Register</a>
 	        <a href="#">About</a>       
-	      </nav>      
+	      </nav> 
+	      
+	      <section>
+            <h:form>
+                <h:dataTable value="#{itemController.nMovies}" var="m">
+                    <h:column>  
+                        <img src="#{m.imageUrl}" width="70px" height="95px"/><br/>
+                        <h:outputText value="#{m.title}" />  
+                    </h:column> 
+                </h:dataTable> 
+            </h:form>
+                
+          </section>     
         
 	        
 	        <div style='display:none'>

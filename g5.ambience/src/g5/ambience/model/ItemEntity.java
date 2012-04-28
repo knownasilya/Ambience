@@ -36,7 +36,7 @@ public class ItemEntity implements Serializable {
 	private String imageUrl;
 
 	@Column(name="is_out", nullable=false)
-	private byte isOut;
+	private boolean isOut;
 
 	@Column(name="mpaa_rating", length=5)
 	private String mpaaRating;
@@ -121,11 +121,11 @@ public class ItemEntity implements Serializable {
 		this.imageUrl = imageUrl;
 	}
 
-	public byte getIsOut() {
+	public boolean getIsOut() {
 		return this.isOut;
 	}
 
-	public void setIsOut(byte isOut) {
+	public void setIsOut(boolean isOut) {
 		this.isOut = isOut;
 	}
 

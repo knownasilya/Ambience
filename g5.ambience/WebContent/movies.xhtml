@@ -48,7 +48,7 @@
           </header>
           
           <nav id="primary">
-            <a href="#">Home</a>
+            <h:link value="Home" outcome="index"/>
             <a href="#">*Movies*</a>
             <a href="#">Games</a>
             <a href="#">Membership</a>
@@ -57,11 +57,15 @@
           </nav>      
           
           <section>
-            <h:datatable value="#{itemController.allItems}" var="item">  
-			    <h:column>  
-			         <h:outputText value="#{item}" />  
-			    </h:column>  
-			</h:datatable> 
+            <h:form>
+	            <h:dataTable value="#{itemController.allItems}" var="i">
+				    <h:column>  
+				        <img src="#{i.imageUrl}" width="70px" height="95px"/><br/>
+				        <h:outputText value="#{i.title}" />  
+				    </h:column> 
+				</h:dataTable> 
+			</h:form>
+				
           </section>
         
             

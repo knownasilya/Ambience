@@ -15,6 +15,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  * @author ilya
@@ -40,6 +41,7 @@ public class ItemController {
 	private int userRating;
 	private Set<BundleEntity> bundleEntities;
 	private List<ItemEntity> allItems;
+	private List<ItemEntity> nMovies;
 	
 	
 	
@@ -53,8 +55,14 @@ public class ItemController {
 	}
 	
 	public List<ItemEntity> findAllItems() {
-	    Query query = em.createQuery("SELECT o FROM ItemEntity o");
+	    TypedQuery<ItemEntity> query = em.createQuery("SELECT o FROM ItemEntity o", ItemEntity.class);
 	    return (List<ItemEntity>)query.getResultList();
+	}
+	
+	public List<ItemEntity> findNUniqueItemsByType(int max, String type){
+		TypedQuery<ItemEntity> query = em.createQuery("SELECT o FROM ItemEntity o WHERE o.type = :type GROUP BY o.referenceNumber", ItemEntity.class);
+		query.setParameter("type", type).setMaxResults(max);
+		return (List<ItemEntity>)query.getResultList();
 	}
 
 	/**
@@ -307,6 +315,20 @@ public class ItemController {
 	 */
 	public void setAllItems(List<ItemEntity> allItems) {
 		this.allItems = allItems;
+	}
+
+	/**
+	 * @return the nMovies
+	 */
+	public List<ItemEntity> getnMovies() {
+		return nMovies = findNUniqueItemsByType(7, "Movie");
+	}
+
+	/**
+	 * @param nMovies the nMovies to set
+	 */
+	public void setnMovies(List<ItemEntity> nMovies) {
+		this.nMovies = nMovies;
 	}
 	
 
