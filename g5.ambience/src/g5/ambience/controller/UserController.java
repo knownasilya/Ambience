@@ -16,6 +16,7 @@ import javax.persistence.PersistenceContext;
 import g5.ambience.model.BundleEntity;
 import g5.ambience.model.ItemEntity;
 import g5.ambience.model.UserEntity;
+import g5.ambience.util.Auth;
 
 
 /**
@@ -51,21 +52,38 @@ public class UserController {
 	private UserEntity getUserByUsernameAndPassword(String username, String password){		
 		try{
 			UserEntity user = em.find(UserEntity.class, username);
-			if(user.getPasswordHash().equals(password)){
+
+			String hash = Auth.hash_password(password);
+		
+			
+			if(user.getPasswordHash().equals(hash)){
 				return user;
 			}
-		} finally {
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		finally {
+			
 		}
 		return null;
 	}
 	
 	private void createUser(String username, String password, String email, String firstName, String lastName, String role){
 		try {
-			UserEntity user = new UserEntity(username, password, email, firstName, lastName, role);
+			String hash = null;
+			
+			hash = Auth.hash_password(password);
+			 
+			UserEntity user = new UserEntity(username, hash, email, firstName, lastName, role);
 			em.getTransaction().begin();
 			em.persist(user);
 			em.getTransaction().commit();
-		} finally {
+		} catch (Exception e) 
+		{
+			e.printStackTrace();
+		}finally {
 		}
 	}
 	

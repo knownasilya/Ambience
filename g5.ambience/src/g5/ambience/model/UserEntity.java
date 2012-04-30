@@ -1,7 +1,12 @@
 package g5.ambience.model;
 
+import g5.ambience.util.Auth;
+
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.Set;
 
@@ -69,6 +74,7 @@ public class UserEntity implements Serializable {
 	private String streetOpt;
 
 	private int zipcode;
+	
 
 	//bi-directional many-to-one association to BundleEntity
 	@OneToMany(mappedBy="userEntity")
@@ -179,8 +185,9 @@ public class UserEntity implements Serializable {
 		return this.passwordHash;
 	}
 
-	public void setPasswordHash(String passwordHash) {
-		this.passwordHash = passwordHash;
+	public void setPasswordHash(String password) 
+	{		
+		this.passwordHash = password;
 	}
 
 	public String getProfileImage() {
