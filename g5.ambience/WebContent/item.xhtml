@@ -41,7 +41,7 @@
             <h1>Ambience</h1>
             <h2>Media Rental App</h2>
             <span class="welcome">
-              Welcome<h:link value="#{userController.firstName}" outcome="profile"/>
+              Welcome <h:link value="#{userController.username}" outcome="profile"  rendered="#{userController.loggedIn}"/>
               <a class="btn login" href="#login_cont">Login</a>
               <a class="btn register" href="#register_cont">Register</a>
             </span>
@@ -57,10 +57,16 @@
           </nav>
           
           <section id="main">
-          
+            <div class="summary">
+                <p>
+                    #{itemController.selectedItem.synopsis}
+                </p>
+            </div>
            <div class="info">
                 <h:form>
-                     <h:commandLink value="Add to Bundle" action="#{itemController.addToBundle}"/>
+                     <h:commandLink styleClass="add_to_bundle" value="Add to Bundle" action="#{userController.addToBundle}" rendered="#{userController.loggedIn}">
+                        <f:param name="item" value="#{itemController.selectedItem}" />
+                     </h:commandLink>
                 </h:form>           
                 <span>
                     <h:outputText value="Type: #{itemController.selectedItem.type}"/><br/>

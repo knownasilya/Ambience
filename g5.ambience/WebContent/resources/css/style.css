@@ -97,7 +97,7 @@
   }
   
   .info {
-    width:35%;
+    width:40%;
     padding:0.8em;
     border:1px solid #999;
   }
@@ -110,4 +110,39 @@
     padding-left:1em;
   }
   
+  .add_to_bundle {
+    display:block;
+  }
   
+  .movies {
+    width:100%;
+    
+  }
+  
+  li.item {
+    list-style-type: none;
+    display:inline-block;
+    width: 100px;
+  }
+  
+  li.item img {
+    vertical-align: top;
+  }
+  
+  li.title {
+    overflow: hidden;
+  }
+  
+  .title {
+    font-size:0.8em;
+    font-weight: normal;
+  }
+  
+  .right {
+    float:right;
+  }
+  
+  .summary {
+    width:50%;
+    float:right;
+  }

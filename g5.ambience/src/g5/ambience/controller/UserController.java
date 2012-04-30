@@ -3,9 +3,12 @@
  */
 package g5.ambience.controller;
 
+import java.util.Date;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
@@ -14,6 +17,7 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import g5.ambience.model.BundleEntity;
+import g5.ambience.model.BundleEntityPK;
 import g5.ambience.model.ItemEntity;
 import g5.ambience.model.UserEntity;
 import g5.ambience.util.Auth;
@@ -31,6 +35,9 @@ public class UserController {
 	private String lastName;
 	private String email;
 	private Set<BundleEntity> bundleEntities;
+	private boolean isLoggedIn;
+	@ManagedProperty(value="#{itemController}")
+	private ItemController itemController;
 
 
 	
@@ -95,10 +102,11 @@ public class UserController {
 	public String login(){
 		try{
 			if(getUserByUsernameAndPassword(this.getUsername(), this.getPassword()) != null){
+				setLoggedIn(true);
 				if(getUserByUsernameAndPassword(username, password).getRole().equals("admin")){
 					return "dashboard";
 				} else if(getUserByUsernameAndPassword(username, password).getRole().equals("member")) {
-					return "profile";
+					return "index"; //just for testing, should be profile
 				}
 				
 			} else {				
@@ -117,16 +125,31 @@ public class UserController {
 		try {
 			UserEntity user = em.find(UserEntity.class, username);
 			BundleEntity bundle = new BundleEntity();
-			bundle.setItemEntity(item);
-			bundle.setUserEntity(user);
+			BundleEntityPK compositePk = new BundleEntityPK();
+			compositePk.setCheckedOutDate(new Date());
+			compositePk.setItemId(item.getItemId());
+			compositePk.setUsername(username);
+			bundle.setId(compositePk);
 			Set<BundleEntity> bundles = null;
 			bundles.add(bundle);
 			user.setBundleEntities(bundles);
 			em.getTransaction().begin();
+			em.persist(bundle);
 			em.merge(user);
 			em.getTransaction().commit();
 		} finally {
 		}
+	}
+	
+
+	public String addToBundle(){
+		try {
+			addItemToBundle(itemController.getSelectedItem());
+		} catch (NullPointerException e) {
+			e.getMessage();
+		}
+		
+		return null;
 	}
 	
 	public void findItemsInBundle() {
@@ -140,6 +163,10 @@ public class UserController {
 		
 		FacesMessage facesMessage = new FacesMessage(message);
 		facesContext.addMessage(id, facesMessage);
+	}
+	
+	public String profile(){
+		return "profile";
 	}
 
 	/**
@@ -226,6 +253,38 @@ public class UserController {
 	 */
 	public void setBundleEntities(Set<BundleEntity> bundleEntities) {
 		this.bundleEntities = bundleEntities;
+	}
+
+
+	/**
+	 * @return the isLoggedIn
+	 */
+	public boolean isLoggedIn() {
+		return isLoggedIn;
+	}
+
+
+	/**
+	 * @param isLoggedIn the isLoggedIn to set
+	 */
+	public void setLoggedIn(boolean isLoggedIn) {
+		this.isLoggedIn = isLoggedIn;
+	}
+
+
+	/**
+	 * @return the itemController
+	 */
+	public ItemController getItemController() {
+		return itemController;
+	}
+
+
+	/**
+	 * @param itemController the itemController to set
+	 */
+	public void setItemController(ItemController itemController) {
+		this.itemController = itemController;
 	}
 
 }

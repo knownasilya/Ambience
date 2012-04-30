@@ -7,17 +7,12 @@ import g5.ambience.model.BundleEntity;
 import g5.ambience.model.ItemEntity;
 import g5.ambience.model.UserEntity;
 
-import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -47,6 +42,7 @@ public class ItemController {
 	private List<ItemEntity> nMovies;
 	private ItemEntity selectedItem;
 	private UserEntity currentUser;
+
 	
 	
 	
@@ -68,27 +64,6 @@ public class ItemController {
 		TypedQuery<ItemEntity> query = em.createQuery("SELECT o FROM ItemEntity o WHERE o.type = :type", ItemEntity.class);
 		query.setParameter("type", type).setMaxResults(max);
 		return (List<ItemEntity>)query.getResultList();
-	}
-	
-	public void addItemToBundle(ItemEntity item){
-		try {
-			UserEntity user = em.find(UserEntity.class, currentUser.getUsername());
-			BundleEntity bundle = new BundleEntity();
-			bundle.setItemEntity(item);
-			bundle.setUserEntity(user);
-			Set<BundleEntity> bundles = null;
-			bundles.add(bundle);
-			user.setBundleEntities(bundles);
-			em.getTransaction().begin();
-			em.merge(user);
-			em.getTransaction().commit();
-		} finally {
-		}
-	}
-	
-	public String addToBundle(){		
-		addItemToBundle(selectedItem);
-		return null;
 	}
 	
 	public String item(){
@@ -387,7 +362,6 @@ public class ItemController {
 	 */
 	public void setCurrentUser(UserEntity currentUser) {
 		this.currentUser = currentUser;
-	}
-	
+	}	
 
 }

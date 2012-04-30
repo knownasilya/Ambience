@@ -41,7 +41,7 @@
             <h1>Ambience</h1>
             <h2>Media Rental App</h2>
             <span class="welcome">
-              Welcome<h:link value="#{userController.firstName}" outcome="profile"/>
+              Welcome <h:link value="#{userController.username}" outcome="profile"  rendered="#{userController.loggedIn}"/>
               <a class="btn login" href="#login_cont">Login</a>
               <a class="btn register" href="#register_cont">Register</a>
             </span>
@@ -60,8 +60,8 @@
             <h:form>
 	            <h:dataTable value="#{itemController.allItems}" var="i">
 				    <h:column>  
-				        <img src="#{i.imageUrl}" width="70px" height="95px"/><br/>
 				        <h:commandLink value="#{i.title}" action="#{itemController.item}">
+				            <img src="#{i.imageUrl}" width="70px" height="95px"/><br/>				        
 				             <f:setPropertyActionListener target="#{itemController.selectedItem}" value="#{i}" />
 				        </h:commandLink>
 				    </h:column> 

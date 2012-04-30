@@ -29,3 +29,4 @@
 	<classpathentry kind="con" path="org.eclipse.datatools.connectivity.jdt.DRIVERLIBRARY/JDBC Mysql"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
+
