@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_g5_ambience_ItemEntity" items="${itementitys}" z="nFkA1dWNM3Ukrs08KJfCY9XaSSU=">
+        <table:table data="${itementitys}" id="l_g5_ambience_ItemEntity" path="/itementitys" typeIdFieldName="itemId" z="dHz3V+XbtukmXPWEwYTr+USMBCM=">
+            <table:column id="c_g5_ambience_ItemEntity_title" property="title" z="OYlsgiOBM4N/LgGU3RBpCebejZ0="/>
+            <table:column date="true" dateTimePattern="${itemEntity_releaseyear_date_format}" id="c_g5_ambience_ItemEntity_releaseYear" property="releaseYear" z="7GePCCSZ6Osqq1mzTeOjijH1/rw="/>
+            <table:column id="c_g5_ambience_ItemEntity_type" property="type" z="3j7JoONLn636q64TEjyVekdlUoE="/>
+            <table:column id="c_g5_ambience_ItemEntity_platform" property="platform" z="fOOVFMfjne2ntQrTzGRP6E8NEuk="/>
+            <table:column id="c_g5_ambience_ItemEntity_genre" property="genre" z="tNHXuTVwi47avm9kUQ2g8yr2/lg="/>
+        </table:table>
+    </page:list>
+</div>

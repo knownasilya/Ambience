@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_g5_ambience_BundleEntity" object="${bundleentity}" path="/bundleentitys" z="MribRWbzDQVpLAm39wPx9aQugl0=">
+        <field:display field="itemId" id="s_g5_ambience_BundleEntity_itemId" object="${bundleentity}" z="A7ODtT8sGtiWSXV5MfepOS/MIAQ="/>
+        <field:display field="username" id="s_g5_ambience_BundleEntity_username" object="${bundleentity}" z="sPRTMGpWabVMR84Gnj8vQ6nsd8o="/>
+        <field:display field="userRating" id="s_g5_ambience_BundleEntity_userRating" object="${bundleentity}" z="pjFFbmuZulJ8OFhJjpHkNF1a+PY="/>
+        <field:display date="true" dateTimePattern="${bundleEntity_returneddate_date_format}" field="returnedDate" id="s_g5_ambience_BundleEntity_returnedDate" object="${bundleentity}" z="oHfDvSjCdnh+Ru9Etqrh+Nufsr4="/>
+    </page:show>
+</div>
