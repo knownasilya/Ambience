@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#index.xhtml" PATH="/index.xhtml"
+  SHAPE="56,48,50,57" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#index.xhtml:0" NAME="item"
+   PATH="/index.xhtml" SHAPE="64,70,47,15" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="success:#{member.login}:#success.xhtml"
+    NAME="output" PATH="/success.xhtml" TARGET="rules:#success.xhtml"
+    TITLE="#{member.login}:success" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:#index.xhtml:1" NAME="item1"
+   PATH="/index.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="failure:#{user.login}:#failure.xhtml"
+    NAME="output" PATH="/failure.xhtml" TARGET="rules:#failure.xhtml"
+    TITLE="#{user.login}:failure" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#success.xhtml" PATH="/success.xhtml"
+  SHAPE="336,88,50,25" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#failure.xhtml" PATH="/failure.xhtml"
+  SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>
