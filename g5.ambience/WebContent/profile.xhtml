@@ -62,6 +62,19 @@
             <h:outputText value="#{userController.username}"/>
             <h:outputText value="#{userController.password}"/>
           </section>      
+          
+          <section>
+	            <h:form>
+	           <ul class="bundles">
+                    <ui:repeat var="b" value="#{itemController.bundleEntities}">
+                        <li class="item">            
+                                <h:outputText styleClass="title" value="#{b.itemId}" />
+                                <h:outputText styleClass="title" value="#{b.username}" />
+                        </li>  
+                    </ui:repeat>
+                </ul>
+                 </h:form>                
+          </section>    
         
             
             <div style='display:none'>

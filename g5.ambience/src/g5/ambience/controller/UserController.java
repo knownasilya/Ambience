@@ -4,6 +4,8 @@
 package g5.ambience.controller;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +17,7 @@ import javax.faces.context.Flash;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import g5.ambience.model.BundleEntity;
 import g5.ambience.model.BundleEntityPK;
@@ -38,6 +41,7 @@ public class UserController {
 	private boolean isLoggedIn;
 	@ManagedProperty(value="#{itemController}")
 	private ItemController itemController;
+	private ItemEntity item;
 
 
 	
@@ -123,6 +127,7 @@ public class UserController {
 	
 	public void addItemToBundle(ItemEntity item){
 		try {
+			em.getTransaction().begin();
 			UserEntity user = em.find(UserEntity.class, username);
 			BundleEntity bundle = new BundleEntity();
 			BundleEntityPK compositePk = new BundleEntityPK();
@@ -132,8 +137,7 @@ public class UserController {
 			bundle.setId(compositePk);
 			Set<BundleEntity> bundles = null;
 			bundles.add(bundle);
-			user.setBundleEntities(bundles);
-			em.getTransaction().begin();
+			user.setBundleEntities(bundles);		
 			em.persist(bundle);
 			em.merge(user);
 			em.getTransaction().commit();
@@ -142,9 +146,9 @@ public class UserController {
 	}
 	
 
-	public String addToBundle(){
+	public String addToBundle(){		
 		try {
-			addItemToBundle(itemController.getSelectedItem());
+			addItemToBundle(item);
 		} catch (NullPointerException e) {
 			e.getMessage();
 		}
@@ -152,9 +156,12 @@ public class UserController {
 		return null;
 	}
 	
-	public void findItemsInBundle() {
-		
+	public Set<BundleEntity> findUsersBundles(String username){
+		TypedQuery<BundleEntity> query = em.createQuery("SELECT x FROM UserEntity o, BundleEntity x WHERE o.username = :username AND o.username = x.username", BundleEntity.class);
+		query.setParameter("username", username);
+		return (Set<BundleEntity>)query.getResultList();
 	}
+	
 	
 	public void message(String message, String id){
 		FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -244,7 +251,7 @@ public class UserController {
 	 * @return the bundleEntities
 	 */
 	public Set<BundleEntity> getBundleEntities() {
-		return bundleEntities;
+		return bundleEntities = findUsersBundles(username);
 	}
 
 
@@ -285,6 +292,22 @@ public class UserController {
 	 */
 	public void setItemController(ItemController itemController) {
 		this.itemController = itemController;
+	}
+
+
+	/**
+	 * @return the item
+	 */
+	public ItemEntity getItem() {
+		return item;
+	}
+
+
+	/**
+	 * @param item the item to set
+	 */
+	public void setItem(ItemEntity item) {
+		this.item = item;
 	}
 
 }

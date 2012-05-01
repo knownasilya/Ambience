@@ -6,7 +6,7 @@
     xmlns:c="http://java.sun.com/jsp/jstl/core">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-        <title>Movies</title>
+        <title>Games</title>
         <h:outputStylesheet library="css" name="style.css" type="text/css"/>
         <h:outputStylesheet library="css" name="colorbox.css" type="text/css"/>
         <h:outputScript library="js" name="jquery.colorbox.js" target="head"/>
@@ -35,9 +35,6 @@
       </script>
         <!--<f:loadBundle basename="g5.ambience.user.model.messages" var="msg"/>-->
     </h:head>
-    <f:metadata>
-	  <f:viewParam name="selectedItem" value="#{itemController.selectedItem}"/> 	
-	</f:metadata>
     <h:body>
         <f:view>
         <header>
@@ -57,40 +54,19 @@
             <a href="#">Membership</a>
             <a href="#">Register</a>
             <a href="#">About</a>       
-          </nav>
+          </nav>      
           
-          <section id="main">
-            <div class="summary">
-                <p>
-                    #{itemController.selectedItem.synopsis}
-                </p>
-            </div>
-           <div class="info">
-                <h:form>
-                     <h:commandLink styleClass="add_to_bundle" value="Add to Bundle" action="#{userController.addToBundle}" rendered="#{userController.loggedIn}">
-                        <f:setPropertyActionListener target="#{userController.item}" value="#{itemController.selectedItem}" />
-                     </h:commandLink>
-                </h:form>           
-                <span>
-                    <h:outputText value="Type: #{itemController.selectedItem.type}"/><br/>
-                    <h:outputText value="Platform: #{itemController.selectedItem.platform}"/><br/>
-                    <h:outputText value="Genre: #{itemController.selectedItem.genre}"/><br/><br/>
-                    <h:outputText value="ESRB Rating: #{itemController.selectedItem.esrbRating}"/><br/><br/>
-                    <h:outputText value="Developer: #{itemController.selectedItem.developer}"/><br/>
-                    <h:outputText value="Released: #{itemController.selectedItem.releaseYear}"/>
-                </span>
-                
-	            <header class="itemview">
-	                <h1>
-	                    <h:outputText value="#{itemController.selectedItem.title}"/>
-	                </h1>
-	                <IMG class="itemview" alt="#{itemController.selectedItem.title} image" src="#{itemController.selectedItem.imageUrl}" />
-	            </header>
-            
-                
-            </div>
-
-            
+          <section>
+            <h:form>
+	            <h:dataTable value="#{itemController.allItems}" var="i">
+				    <h:column>  
+				        <h:commandLink value="#{i.title}" action="#{itemController.item}">
+				            <img src="#{i.imageUrl}" width="70px" height="95px"/><br/>				        
+				             <f:setPropertyActionListener target="#{itemController.selectedItem}" value="#{i}" />
+				        </h:commandLink>
+				    </h:column> 
+				</h:dataTable> 
+			</h:form>
 				
           </section>
         
