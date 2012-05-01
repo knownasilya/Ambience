@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
-    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-    <jsp:output omit-xml-declaration="yes"/>
-    <form:update id="fu_g5_ambience_BundleEntity" modelAttribute="bundleEntity" path="/bundleentitys" versionField="none" z="UZE6gfA3AByqqlb+wHfUYBnHkAM=">
-        <field:input field="userRating" id="c_g5_ambience_BundleEntity_userRating" validationMessageCode="field_invalid_integer" z="9y1DYbE7PvOFcG7layf/8yftmco="/>
-        <field:datetime dateTimePattern="${bundleEntity_returneddate_date_format}" field="returnedDate" id="c_g5_ambience_BundleEntity_returnedDate" z="kpKnfAf2XocSjEJ3NuMp+v3mLOU="/>
-    </form:update>
-</div>
