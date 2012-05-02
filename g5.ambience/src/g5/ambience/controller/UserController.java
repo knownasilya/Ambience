@@ -32,11 +32,15 @@ import g5.ambience.util.Auth;
  */
 public class UserController {
 	
-	private UserEntity user;
+
 	private String password;
+	private String username;
+	private String firstName;
+	private String lastName;
+	private String email;
 	private boolean isLoggedIn;
-	@ManagedProperty(value="#{itemController}")
-	private ItemController itemController;
+	//@ManagedProperty(value="#{itemController}")
+	//private ItemController itemController;
 	private ItemEntity item;
 
 
@@ -53,7 +57,6 @@ public class UserController {
 		if(em == null){
 			em = (EntityManager) Persistence.createEntityManagerFactory("g5.ambience").createEntityManager();
 		}		
-		user = new UserEntity();
 	}
 
 	
@@ -65,6 +68,7 @@ public class UserController {
 		
 			
 			if(user.getPasswordHash().equals(hash)){
+				//em.flush();
 				return user;
 			}
 		} 
@@ -96,17 +100,17 @@ public class UserController {
 	}
 	
 	public String registerUser(){
-		createUser(user.getUsername(), user.getPasswordHash(), user.getEmail(), user.getFirstName(), user.getLastName(), "member");
+		createUser(this.getUsername(), this.getPassword(), this.getEmail(), this.getFirstName(), this.getLastName(), "member");
 		return "profile";
 	}
 	
 	public String login(){
 		try{
-			if(getUserByUsernameAndPassword(user.getUsername(), this.getPassword()) != null){
+			if(getUserByUsernameAndPassword(this.getUsername(), this.getPassword()) != null){
 				setLoggedIn(true);
-				if(getUserByUsernameAndPassword(user.getUsername(), user.getPasswordHash()).getRole().equals("admin")){
+				if(getUserByUsernameAndPassword(this.getUsername(), this.getPassword()).getRole().equals("admin")){
 					return "dashboard";
-				} else if(getUserByUsernameAndPassword(user.getUsername(), user.getPasswordHash()).getRole().equals("member")) {
+				} else if(getUserByUsernameAndPassword(this.getUsername(), this.getPassword()).getRole().equals("member")) {
 					return "index"; //just for testing, should be profile
 				}
 				
@@ -125,6 +129,7 @@ public class UserController {
 	public void addItemToBundle(ItemEntity item){
 		try {
 			em.getTransaction().begin();
+			UserEntity user = em.find(UserEntity.class, this.username);
 			BundleEntity bundle = new BundleEntity();
 			BundleEntityPK compositePk = new BundleEntityPK();
 			compositePk.setCheckedOutDate(new Date());
@@ -134,8 +139,8 @@ public class UserController {
 			Set<BundleEntity> bundles = null;
 			bundles.add(bundle);
 			user.setBundleEntities(bundles);		
-			//em.persist(bundle);
-			em.merge(user);
+			em.persist(bundle);
+			em.persist(user);
 			em.flush();
 			em.getTransaction().commit();
 		} finally {
@@ -191,22 +196,6 @@ public class UserController {
 
 
 	/**
-	 * @return the itemController
-	 */
-	public ItemController getItemController() {
-		return itemController;
-	}
-
-
-	/**
-	 * @param itemController the itemController to set
-	 */
-	public void setItemController(ItemController itemController) {
-		this.itemController = itemController;
-	}
-
-
-	/**
 	 * @return the item
 	 */
 	public ItemEntity getItem() {
@@ -220,24 +209,7 @@ public class UserController {
 	public void setItem(ItemEntity item) {
 		this.item = item;
 	}
-
-
-	/**
-	 * @return the user
-	 */
-	public UserEntity getUser() {
-		return user;
-	}
-
-
-	/**
-	 * @param user the user to set
-	 */
-	public void setUser(UserEntity user) {
-		this.user = user;
-	}
-
-
+	
 	/**
 	 * @return the password
 	 */
@@ -251,6 +223,70 @@ public class UserController {
 	 */
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+
+	/**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return username;
+	}
+
+
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+	/**
+	 * @return the firstName
+	 */
+	public String getFirstName() {
+		return firstName;
+	}
+
+
+	/**
+	 * @param firstName the firstName to set
+	 */
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+
+	/**
+	 * @return the lastName
+	 */
+	public String getLastName() {
+		return lastName;
+	}
+
+
+	/**
+	 * @param lastName the lastName to set
+	 */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

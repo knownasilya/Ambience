@@ -33,7 +33,7 @@
         });      
         
       </script>
-        <!--<f:loadBundle basename="g5.ambience.user.model.messages" var="msg"/>-->
+        <!--<f:loadBundle basename="g5.ambience.model.messages" var="msg"/>-->
     </h:head>
     <h:body>
         <f:view>
@@ -41,7 +41,7 @@
             <h1>Ambience</h1>
             <h2>Media Rental App</h2>
             <span class="welcome">
-              Welcome <h:link value="#{userController.user.firstName}" outcome="profile"  rendered="#{userController.loggedIn}"/>
+              Welcome <h:link value="#{userController.firstName}" outcome="profile"  rendered="#{userController.loggedIn}"/>
               <a class="btn login" href="#login_cont">Login</a>
               <a class="btn register" href="#register_cont">Register</a>
             </span>
