@@ -71,6 +71,25 @@ public class ItemEntity implements Serializable {
 
     public ItemEntity() {
     }
+    
+    public ItemEntity(int itemId, String title, int releaseYear, String type, String platform, String genre, boolean isOut, int userRating, String esrbRating, int referenceNumber, String director, String trailerUrl, String synopsis, String imageUrl, String developer, String mpaaRating) {
+    	this.itemId = itemId;
+    	this.title = title;
+    	this.releaseYear = releaseYear;
+    	this.type = type;
+    	this.platform = platform;
+    	this.genre = genre;
+    	this.isOut = isOut;
+    	this.userRating = userRating;
+    	this.esrbRating = esrbRating;
+    	this.referenceNumber = referenceNumber;
+    	this.director = director;
+    	this.trailerUrl = trailerUrl;
+    	this.synopsis = synopsis;
+    	this.imageUrl = imageUrl;
+    	this.developer = developer;
+    	this.mpaaRating = mpaaRating;
+    }
 
 	public int getItemId() {
 		return this.itemId;

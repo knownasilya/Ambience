@@ -6,6 +6,7 @@ package g5.ambience.controller;
 import g5.ambience.model.BundleEntity;
 import g5.ambience.model.ItemEntity;
 import g5.ambience.model.UserEntity;
+import g5.ambience.util.Auth;
 
 import java.util.List;
 import java.util.Set;
@@ -53,6 +54,98 @@ public class ItemController {
 		if(em == null){
 			em = (EntityManager) Persistence.createEntityManagerFactory("g5.ambience").createEntityManager();
 		}		
+	}
+	
+	private void createMovie(int itemId, String title, int releaseYear, String type, String platform, String genre, boolean isOut, int userRating, int referenceNumber, String director, String trailerUrl, String synopsis, String imageUrl, String mpaaRating){
+		try {
+			String esrbRating = "N/A";
+			String developer = "N/A";
+			ItemEntity item = new ItemEntity(itemId, title, releaseYear, type, platform, genre, isOut, userRating, esrbRating, referenceNumber, director, trailerUrl, synopsis, imageUrl, developer, mpaaRating);
+			em.getTransaction().begin();
+			em.persist(item);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			//blank
+		}
+	}
+	
+	private void createGame(int itemId, String title, int releaseYear, String type, String platform, String genre, boolean isOut, int userRating, String esrbRating, int referenceNumber, String trailerUrl, String synopsis, String imageUrl, String developer){
+		try {
+			String mpaaRating = "N/A";
+			String director = "N/A";
+			ItemEntity item = new ItemEntity(itemId, title, releaseYear, type, platform, genre, isOut, userRating, esrbRating, referenceNumber, director, trailerUrl, synopsis, imageUrl, developer, mpaaRating);
+			em.getTransaction().begin();
+			em.persist(item);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			//blank
+		}
+	}
+	
+	public void deleteItem(int itemId) {		
+		try {
+			ItemEntity item = em.find(ItemEntity.class, itemId);
+			em.getTransaction().begin();
+			em.remove(item);
+			em.getTransaction().commit();
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		finally {	
+		}
+	}
+	
+	public void updateItem(int itemId, String title, int releaseYear, String type, String platform, String genre, boolean isOut, int userRating, String esrbRating, int referenceNumber, String director, String trailerUrl, String synopsis, String imageUrl, String developer, String mpaaRating) {
+		try {
+			ItemEntity item = em.find(ItemEntity.class, itemId);
+			em.getTransaction().begin();
+			em.merge(item);
+			em.getTransaction().commit();
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		finally {	
+		}
+	}
+	
+	public List<ItemEntity> searchItem(int itemId) {
+		try {
+			TypedQuery<ItemEntity> query = em.createQuery("SELECT o FROM ItemEntity o WHERE o.itemId = :itemId", ItemEntity.class);
+			query.setParameter("itemId", itemId);
+			return (List<ItemEntity>)query.getResultList();
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		finally {
+		}
+		return null;
+	}
+	
+	public List<ItemEntity> searchItem(String title) {
+		try {
+			TypedQuery<ItemEntity> query = em.createQuery("SELECT o FROM ItemEntity o WHERE o.title = :title", ItemEntity.class);
+			query.setParameter("title", title);
+			return (List<ItemEntity>)query.getResultList();
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		finally {
+		}
+		return null;
 	}
 	
 	public List<ItemEntity> findAllItems() {
