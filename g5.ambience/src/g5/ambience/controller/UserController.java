@@ -4,6 +4,7 @@
 package g5.ambience.controller;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -42,6 +43,7 @@ public class UserController {
 	//@ManagedProperty(value="#{itemController}")
 	//private ItemController itemController;
 	private ItemEntity item;
+	private UserEntity user;
 
 
 	
@@ -56,7 +58,8 @@ public class UserController {
 	public UserController(){
 		if(em == null){
 			em = (EntityManager) Persistence.createEntityManagerFactory("g5.ambience").createEntityManager();
-		}		
+		}	
+		setUser(new UserEntity());
 	}
 
 	
@@ -107,6 +110,8 @@ public class UserController {
 	public String login(){
 		try{
 			if(getUserByUsernameAndPassword(this.getUsername(), this.getPassword()) != null){
+				System.out.println(password);
+				System.out.println(username);
 				setLoggedIn(true);
 				if(getUserByUsernameAndPassword(this.getUsername(), this.getPassword()).getRole().equals("admin")){
 					return "dashboard";
@@ -136,7 +141,7 @@ public class UserController {
 			compositePk.setItemId(item.getItemId());
 			compositePk.setUsername(user.getUsername());
 			bundle.setId(compositePk);
-			Set<BundleEntity> bundles = null;
+			Set<BundleEntity> bundles = new HashSet<BundleEntity>();
 			bundles.add(bundle);
 			user.setBundleEntities(bundles);		
 			em.persist(bundle);
@@ -287,6 +292,22 @@ public class UserController {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+
+	/**
+	 * @return the user
+	 */
+	public UserEntity getUser() {
+		return user;
+	}
+
+
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(UserEntity user) {
+		this.user = user;
 	}
 
 }

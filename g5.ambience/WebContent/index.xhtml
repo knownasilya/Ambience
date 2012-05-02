@@ -3,15 +3,16 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:c="http://java.sun.com/jsp/jstl/core">
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:p="http://primefaces.org/ui">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
         <!--<meta http-equiv="refresh" content="0; URL=index.xhtml"/> -->
         <title>Index</title>
         <h:outputStylesheet library="css" name="style.css" type="text/css"/>
         <h:outputStylesheet library="css" name="colorbox.css" type="text/css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
         <h:outputScript library="js" name="jquery.colorbox.js" target="head"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script>        
         $(document).ready(function() {
             var btn = $(".btn");
@@ -24,12 +25,6 @@
                 event.preventDefault();   
                 login_btn.colorbox({inline:true, width:"30%"});           
                 register_btn.colorbox({inline:true, width:"50%"});   
-            });
-
-            $("#click").click(function(){ 
-                $('#click').css({"background-color":"#f00", "color":"#fff","cursor":"inherit"})
-                .text("Open this window again and this message will still be here.");
-                return false;
             });
         });      
         
@@ -59,18 +54,26 @@
 	      
 	      <section>
 	            <h:form>
-	           <ul class="movies">
-                    <ui:repeat var="m" value="#{itemController.nMovies}">
-                        <li class="item">
-                            <h:commandLink action="#{itemController.item}">               
-                                <img src="#{m.imageUrl}" width="70px" height="95px"/><br/>
-                                <h:outputText styleClass="title" value="#{m.title}" />
-                            </h:commandLink>
-                        </li>  
-                    </ui:repeat>
-                </ul>
+	           		<ul class="movies">
+		           		<p:dataGrid var="movie" value="#{itemController.allItems}" columns="4"  
+	        														rows="12" paginator="true"  
+	        														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} 
+	        														{PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} 
+	        														{RowsPerPageDropdown}" rowsPerPageTemplate="9,12,15">
+	        				 <p:column>  
+					            <p:panel header="#{movie.title}" style="text-align:center">  
+					                <h:panelGrid columns="1" style="width:100%">  
+					                    <p:graphicImage value="#{movie.imageUrl}" width="150px"/>  				                  
+					                    <h:outputText value="#{movie.director}" />  
+					                </h:panelGrid>  
+					            </p:panel>  
+					        </p:column>  
+		           			
+		           		</p:dataGrid>
+                	</ul>
                  </h:form>                
-          </section>     
+          </section> 
+           
         
 	        
 	        <div style='display:none'>

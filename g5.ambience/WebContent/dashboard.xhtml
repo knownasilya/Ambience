@@ -3,11 +3,103 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:c="http://java.sun.com/jsp/jstl/core">
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+        <!--<meta http-equiv="refresh" content="0; URL=index.xhtml"/> -->
+        <title>Dashboard</title>
+        <h:outputStylesheet library="css" name="style.css" type="text/css"/>
+        <h:outputStylesheet library="css" name="colorbox.css" type="text/css"/>
+        <h:outputScript library="js" name="jquery.colorbox.js" target="head"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script>        
+        $(document).ready(function() {
+            var btn = $(".btn");
+            var login_btn = $(".login");
+            var login_form = $(".login_form");
+            var register_btn = $(".register");
+      
+          
+            btn.click(function(event){
+                event.preventDefault();   
+                login_btn.colorbox({inline:true, width:"30%"});           
+                register_btn.colorbox({inline:true, width:"50%"});   
+            });
+        });      
+        
+      </script>
+        <!--<f:loadBundle basename="g5.ambience.model.messages" var="msg"/>-->
     </h:head>
     <h:body>
-        Dashboard
-    </h:body>   
+        <f:view>
+	    <header>
+	        <h1>Ambience</h1>
+	        <h2>Media Rental App</h2>
+	        <span class="welcome">
+	          Welcome <h:link value="#{userController.user.firstName}" outcome="profile" rendered="#{userController.loggedIn}"/>
+	          <a class="btn login" href="#login_cont">Login</a>
+	          <a class="btn register" href="#register_cont">Register</a>
+	        </span>
+	      </header>
+	      
+	      <nav id="primary">
+	        <h:link value="Home" outcome="index"/>
+	        <h:link value="Movies" outcome="movies"/>
+	        <h:link value="Games" outcome="games"/>
+	        <a href="#">Membership</a>
+	        <a href="#">Register</a>
+	        <a href="#">About</a>       
+	      </nav> 
+	      
+	      <section>
+	            <h:form>
+	       
+                 </h:form>                
+          </section>     
+        
+	        
+	        <div style='display:none'>
+	            <div id='login_cont' style='padding:10px; background:#fff;'>
+	               <p><strong>User Login Form</strong></p>
+	               <h:form id="login_form">
+	               		<h:panelGrid columns="2">
+			                <h:outputLabel value="Username" for="username"></h:outputLabel>
+			                <h:inputText value="#{userController.username}" id="username"></h:inputText><br/>
+			                <h:outputLabel value="Password" for="password"></h:outputLabel>
+			                <h:inputSecret value="#{userController.password}" id="password"/><br/>
+			                <h:commandButton id="login_btn" value="Login" action="#{userController.login}"/> 
+			                <h:message id="error" for="login_btn"/>
+		                </h:panelGrid>                 
+		            </h:form>	
+	            </div>
+	            
+	            <div id='register_cont' style='padding:10px; background:#fff;'>
+                   <p><strong>Registration Form</strong></p>
+                   <h:form id="register_form">
+                        <h:outputLabel value="Username" for="username"/>
+                        <h:inputText value="#{userController.username}" id="username" required="true"/><br/>
+                        
+                        <h:outputLabel value="Email" for="email"/>
+                        <h:inputText value="#{userController.email}" id="email" required="true"/><br/>
+                        
+                        <h:outputLabel value="Password" for="password"/>
+                        <h:inputSecret value="#{userController.password}" id="password" required="true"/><br/>
+                        
+                        <h:outputLabel value="First Name" for="firstName"/>
+                        <h:inputText value="#{userController.firstName}" id="firstName"/>
+                        
+                        <h:outputLabel value="Last Name" for="lastName"/>
+                        <h:inputText value="#{userController.lastName}" id="lastName"/><br/>                         
+                        
+                        <h:commandButton id="register_btn" value="Register" action="#{userController.registerUser}"/> 
+                        <h:message id="error" for="register_btn"/>                 
+                    </h:form>   
+                </div>
+            </div>
+
+        </f:view>
+        
+
+    </h:body>
 </html>
