@@ -77,7 +77,7 @@ public class UserEntity implements Serializable {
 	
 
 	//bi-directional many-to-one association to BundleEntity
-	@OneToMany(mappedBy="userEntity")
+	@OneToMany(mappedBy="userEntity",cascade=CascadeType.PERSIST)
 	private Set<BundleEntity> bundleEntities;
 
     public UserEntity() {

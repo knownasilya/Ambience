@@ -32,12 +32,8 @@ import g5.ambience.util.Auth;
  */
 public class UserController {
 	
-	private String username;
+	private UserEntity user;
 	private String password;
-	private String firstName;
-	private String lastName;
-	private String email;
-	private Set<BundleEntity> bundleEntities;
 	private boolean isLoggedIn;
 	@ManagedProperty(value="#{itemController}")
 	private ItemController itemController;
@@ -57,6 +53,7 @@ public class UserController {
 		if(em == null){
 			em = (EntityManager) Persistence.createEntityManagerFactory("g5.ambience").createEntityManager();
 		}		
+		user = new UserEntity();
 	}
 
 	
@@ -83,33 +80,33 @@ public class UserController {
 	
 	private void createUser(String username, String password, String email, String firstName, String lastName, String role){
 		try {
-			String hash = null;
-			
+			String hash = null;			
 			hash = Auth.hash_password(password);
 			 
 			UserEntity user = new UserEntity(username, hash, email, firstName, lastName, role);
 			em.getTransaction().begin();
 			em.persist(user);
 			em.getTransaction().commit();
-		} catch (Exception e) 
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		}
+		finally {
+			//blank
 		}
 	}
 	
 	public String registerUser(){
-		createUser(this.username, this.password, this.email, this.firstName, this.lastName, "member");
+		createUser(user.getUsername(), user.getPasswordHash(), user.getEmail(), user.getFirstName(), user.getLastName(), "member");
 		return "profile";
 	}
 	
 	public String login(){
 		try{
-			if(getUserByUsernameAndPassword(this.getUsername(), this.getPassword()) != null){
+			if(getUserByUsernameAndPassword(user.getUsername(), this.getPassword()) != null){
 				setLoggedIn(true);
-				if(getUserByUsernameAndPassword(username, password).getRole().equals("admin")){
+				if(getUserByUsernameAndPassword(user.getUsername(), user.getPasswordHash()).getRole().equals("admin")){
 					return "dashboard";
-				} else if(getUserByUsernameAndPassword(username, password).getRole().equals("member")) {
+				} else if(getUserByUsernameAndPassword(user.getUsername(), user.getPasswordHash()).getRole().equals("member")) {
 					return "index"; //just for testing, should be profile
 				}
 				
@@ -128,18 +125,18 @@ public class UserController {
 	public void addItemToBundle(ItemEntity item){
 		try {
 			em.getTransaction().begin();
-			UserEntity user = em.find(UserEntity.class, username);
 			BundleEntity bundle = new BundleEntity();
 			BundleEntityPK compositePk = new BundleEntityPK();
 			compositePk.setCheckedOutDate(new Date());
 			compositePk.setItemId(item.getItemId());
-			compositePk.setUsername(username);
+			compositePk.setUsername(user.getUsername());
 			bundle.setId(compositePk);
 			Set<BundleEntity> bundles = null;
 			bundles.add(bundle);
 			user.setBundleEntities(bundles);		
-			em.persist(bundle);
+			//em.persist(bundle);
 			em.merge(user);
+			em.flush();
 			em.getTransaction().commit();
 		} finally {
 		}
@@ -174,92 +171,6 @@ public class UserController {
 	
 	public String profile(){
 		return "profile";
-	}
-
-	/**
-	 * @return the username
-	 */
-	public String getUsername() {
-		return username;
-	}
-
-	/**
-	 * @param username the username to set
-	 */
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	/**
-	 * @return the password
-	 */
-	public String getPassword() {
-		return password;
-	}
-
-	/**
-	 * @param password the password to set
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	/**
-	 * @return the firstName
-	 */
-	public String getFirstName() {
-		return firstName;
-	}
-
-	/**
-	 * @param firstName the firstName to set
-	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	/**
-	 * @return the lastName
-	 */
-	public String getLastName() {
-		return lastName;
-	}
-
-	/**
-	 * @param lastName the lastName to set
-	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	/**
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
-
-	/**
-	 * @param email the email to set
-	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-
-	/**
-	 * @return the bundleEntities
-	 */
-	public Set<BundleEntity> getBundleEntities() {
-		return bundleEntities = findUsersBundles(username);
-	}
-
-
-	/**
-	 * @param bundleEntities the bundleEntities to set
-	 */
-	public void setBundleEntities(Set<BundleEntity> bundleEntities) {
-		this.bundleEntities = bundleEntities;
 	}
 
 
@@ -308,6 +219,38 @@ public class UserController {
 	 */
 	public void setItem(ItemEntity item) {
 		this.item = item;
+	}
+
+
+	/**
+	 * @return the user
+	 */
+	public UserEntity getUser() {
+		return user;
+	}
+
+
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(UserEntity user) {
+		this.user = user;
+	}
+
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }
