@@ -27,7 +27,7 @@ public class ItemController {
 	private String esrbRating;
 	private String genre;
 	private String imageUrl;
-	private byte isOut;
+	private boolean isOut;
 	private String mpaaRating;
 	private String platform;
 	private int referenceNumber;
@@ -157,14 +157,14 @@ public class ItemController {
 	/**
 	 * @return the isOut
 	 */
-	public byte getIsOut() {
+	public boolean getIsOut() {
 		return isOut;
 	}
 
 	/**
 	 * @param isOut the isOut to set
 	 */
-	public void setIsOut(byte isOut) {
+	public void setIsOut(boolean isOut) {
 		this.isOut = isOut;
 	}
 
