@@ -40,7 +40,10 @@ public class ItemController {
 	private int userRating;
 	private Set<BundleEntity> bundleEntities;
 	private List<ItemEntity> allItems;
-	private List<ItemEntity> nMovies;
+	private List<ItemEntity> movies;
+	private List<ItemEntity> games;
+	private List<ItemEntity> topTen;
+	private List<ItemEntity> latestItems;
 	private ItemEntity selectedItem;
 	private UserEntity currentUser;
 
@@ -153,9 +156,26 @@ public class ItemController {
 	    return (List<ItemEntity>)query.getResultList();
 	}
 	
-	public List<ItemEntity> findNUniqueItemsByType(int max, String type){
+	public List<ItemEntity> findItemsWithRatingGreaterThan(int value) {
+	    TypedQuery<ItemEntity> query = em.createQuery("SELECT o FROM ItemEntity o WHERE o.userRating > :value", ItemEntity.class);
+	    query.setParameter("value", value);
+	    return (List<ItemEntity>)query.getResultList();
+	}
+	
+	public List<ItemEntity> findAllItems(String type) {
+	    TypedQuery<ItemEntity> query = em.createQuery("SELECT o FROM ItemEntity o WHERE o.type = :type", ItemEntity.class);
+	    query.setParameter("type", type);
+	    return (List<ItemEntity>)query.getResultList();
+	}
+	
+	public List<ItemEntity> findUniqueItemsByType(String type, int numItems){
 		TypedQuery<ItemEntity> query = em.createQuery("SELECT o FROM ItemEntity o WHERE o.type = :type", ItemEntity.class);
-		query.setParameter("type", type).setMaxResults(max);
+		if(numItems > 0){
+			query.setParameter("type", type).setMaxResults(numItems);
+		} 
+		else {
+			query.setParameter("type", type);
+		}		
 		return (List<ItemEntity>)query.getResultList();
 	}
 	
@@ -415,19 +435,6 @@ public class ItemController {
 		this.allItems = allItems;
 	}
 
-	/**
-	 * @return the nMovies
-	 */
-	public List<ItemEntity> getnMovies() {
-		return nMovies = findNUniqueItemsByType(7, "Movie");
-	}
-
-	/**
-	 * @param nMovies the nMovies to set
-	 */
-	public void setnMovies(List<ItemEntity> nMovies) {
-		this.nMovies = nMovies;
-	}
 
 	/**
 	 * @return the selectedItem
@@ -455,6 +462,63 @@ public class ItemController {
 	 */
 	public void setCurrentUser(UserEntity currentUser) {
 		this.currentUser = currentUser;
+	}
+
+	/**
+	 * @return the movies
+	 */
+	public List<ItemEntity> getMovies() {
+		//0 means do not limit the number of rows returned.
+		return movies = findUniqueItemsByType("Movie", 0);
+	}
+
+	/**
+	 * @param movies the movies to set
+	 */
+	public void setMovies(List<ItemEntity> movies) {
+		this.movies = movies;
+	}
+
+	/**
+	 * @return the games
+	 */
+	public List<ItemEntity> getGames() {
+		return games;
+	}
+
+	/**
+	 * @param games the games to set
+	 */
+	public void setGames(List<ItemEntity> games) {
+		this.games = games;
+	}
+
+	/**
+	 * @return the topTen
+	 */
+	public List<ItemEntity> getTopTen() {
+		return topTen = findItemsWithRatingGreaterThan(3);
+	}
+
+	/**
+	 * @param topTen the topTen to set
+	 */
+	public void setTopTen(List<ItemEntity> topTen) {
+		this.topTen = topTen;
+	}
+
+	/**
+	 * @return the latestItems
+	 */
+	public List<ItemEntity> getLatestItems() {
+		return latestItems;
+	}
+
+	/**
+	 * @param latestItems the latestItems to set
+	 */
+	public void setLatestItems(List<ItemEntity> latestItems) {
+		this.latestItems = latestItems;
 	}	
 
 }

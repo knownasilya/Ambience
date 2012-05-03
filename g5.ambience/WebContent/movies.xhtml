@@ -57,19 +57,27 @@
             <a href="#">About</a>       
           </nav>      
           
-          <section>
-            <h:form>
-	            <h:dataTable value="#{itemController.allItems}" var="i">
-				    <h:column>  
-				        <h:commandLink value="#{i.title}" action="#{itemController.item}">
-				            <img src="#{i.imageUrl}" width="70px" height="95px"/><br/>				        
-				             <f:setPropertyActionListener target="#{itemController.selectedItem}" value="#{i}" />
-				        </h:commandLink>
-				    </h:column> 
-				</h:dataTable> 
-			</h:form>
-				
-          </section>
+           <section class="main">
+	            <h:form>
+	           		<ul class="movies">
+		           		<p:dataGrid var="movie" value="#{itemController.movies}" columns="4"  
+	        														rows="12" paginator="true"  
+	        														paginatorTemplate="{CurrentPageReport}  {FirstPageLink} 
+	        														{PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} 
+	        														{RowsPerPageDropdown}" rowsPerPageTemplate="9,12,15">
+	        				 <p:column>  
+					            <p:panel header="#{movie.title}" style="text-align:center">  
+					                <h:panelGrid columns="1" style="width:100%">  
+					                    <p:graphicImage value="#{movie.imageUrl}" width="150px"/>  				                  
+					                    <h:outputText value="#{movie.director}" />  
+					                </h:panelGrid>  
+					            </p:panel>  
+					        </p:column>  
+		           			
+		           		</p:dataGrid>
+                	</ul>
+                 </h:form>                
+          </section> 
         
             
             <div style='display:none'>

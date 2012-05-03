@@ -68,6 +68,10 @@
     padding:2em 0;
   }
   
+  .main {
+  	padding-top:1.2em;
+  }
+  
   #javax_faces_developmentstage_messages {
     list-style-type:none;
     padding:0.2em 0.5em 0.2em 0.8em;
