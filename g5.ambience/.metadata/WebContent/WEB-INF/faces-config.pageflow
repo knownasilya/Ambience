@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13353792929770" configfile="/g5.ambience/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="movies.xhtml" x="156" y="60" width="97" height="109" id="pf13356484088610" outlinks="pf13356484088611" path="/movies.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="item.xhtml" x="422" y="53" id="pf13356484088622" inlinks="pf13356484088611" path="/item.xhtml"/>
-  <links id="pf13356484088611" target="pf13356484088622" source="pf13356484088610" outcome="item" redirect="true" fromaction="#{itemController.item}"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="216" y="108" width="85" height="97" id="pf13360422698802" outlinks="pf13360422698803" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="item.xhtml" x="528" y="96" width="97" height="109" id="pf13360422698804" inlinks="pf13360422698803" path="/item.xhtml"/>
+  <links id="pf13360422698803" target="pf13360422698804" source="pf13360422698802" outcome="item" fromaction="#{itemController.item}"/>
 </pageflow:Pageflow>

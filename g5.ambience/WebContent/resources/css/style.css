@@ -14,6 +14,10 @@
     float:right;
   }
   
+  .welcome form {
+  	display:inline-block;
+  }
+  
   header h1, header h2 {
     display:inline-block;
   }

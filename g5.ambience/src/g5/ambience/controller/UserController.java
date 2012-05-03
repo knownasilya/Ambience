@@ -40,10 +40,12 @@ public class UserController {
 	private String lastName;
 	private String email;
 	private boolean isLoggedIn;
+	private String loginLogout;
 	//@ManagedProperty(value="#{itemController}")
 	//private ItemController itemController;
 	private ItemEntity item;
 	private UserEntity user;
+	private Set<BundleEntity> bundleEntities;
 
 
 	
@@ -131,7 +133,15 @@ public class UserController {
 		return null;
 	}
 	
+	public String logout(){
+		if(isLoggedIn){
+			FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		}		
+		return null;
+	}
+	
 	public void addItemToBundle(ItemEntity item){
+		System.out.println(item.getTitle());
 		try {
 			em.getTransaction().begin();
 			UserEntity user = em.find(UserEntity.class, this.username);
@@ -157,7 +167,7 @@ public class UserController {
 		try {
 			addItemToBundle(item);
 		} catch (NullPointerException e) {
-			e.getMessage();
+			 System.err.println(e.getMessage());
 		}
 		
 		return null;
@@ -308,6 +318,38 @@ public class UserController {
 	 */
 	public void setUser(UserEntity user) {
 		this.user = user;
+	}
+
+
+	/**
+	 * @return the loginLogout
+	 */
+	public String getLoginLogout() {
+		return loginLogout;
+	}
+
+
+	/**
+	 * @param loginLogout the loginLogout to set
+	 */
+	public void setLoginLogout(String loginLogout) {
+		this.loginLogout = loginLogout;
+	}
+
+
+	/**
+	 * @return the bundleEntities
+	 */
+	public Set<BundleEntity> getBundleEntities() {
+		return bundleEntities;
+	}
+
+
+	/**
+	 * @param bundleEntities the bundleEntities to set
+	 */
+	public void setBundleEntities(Set<BundleEntity> bundleEntities) {
+		this.bundleEntities = bundleEntities;
 	}
 
 }

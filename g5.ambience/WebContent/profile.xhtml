@@ -10,8 +10,14 @@
         <title>#{userController.username}s Profile</title>
         <h:outputStylesheet library="css" name="style.css" type="text/css"/>
         <h:outputStylesheet library="css" name="colorbox.css" type="text/css"/>
-        <h:outputScript library="js" name="jquery.colorbox.js" target="head"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<f:facet name="first">
+		    <h:outputScript library="primefaces" name="jquery/jquery.js"/>
+		    <h:outputScript target="head">
+		        $ = jQuery;
+		    </h:outputScript>
+		</f:facet>
+		<h:outputScript library="js" name="jquery.colorbox.js" target="head"/>
+       	
         <script>        
         $(document).ready(function() {
             var btn = $(".btn");
@@ -22,14 +28,8 @@
           
             btn.click(function(event){
                 event.preventDefault();   
-                login_btn.colorbox({inline:true, width:"30%"});           
-                register_btn.colorbox({inline:true, width:"50%"});   
-            });
-
-            $("#click").click(function(){ 
-                $('#click').css({"background-color":"#f00", "color":"#fff","cursor":"inherit"})
-                .text("Open this window again and this message will still be here.");
-                return false;
+                login_btn.colorbox({inline:true, width:"30%", href:"#login_cont"});           
+                register_btn.colorbox({inline:true, width:"50%", href:"#register_cont"});   
             });
         });      
         
@@ -38,15 +38,21 @@
     </h:head>
     <h:body>
         <f:view>
-        <header>
-            <h1>Ambience</h1>
-            <h2>Media Rental App</h2>
-            <span class="welcome">
-              Welcome <h:link value="#{userController.firstName}" outcome="profile" rendered="#{userController.loggedIn}"/>
-              <a class="btn login" href="#login_cont">Login</a>
-              <a class="btn register" href="#register_cont">Register</a>
-            </span>
-          </header>
+
+
+					
+					<header>
+				        <h1>Ambience</h1>
+				        <h2>Media Rental App</h2>
+				        <span class="welcome">
+				          Welcome <h:link value=" #{userController.username}" outcome="profile" rendered="#{userController.loggedIn}"/>				          
+				          <h:form>
+				          	<h:link  styleClass="btn login" value="Login" rendered="#{!userController.loggedIn}"/>
+				          	<h:commandLink id="login" styleClass="btn" value="Logout" rendered="#{userController.loggedIn}" action="#{userController.logout}"/>
+				          	<h:link styleClass="btn register" value="Register" rendered="#{!userController.loggedIn}"  />			          	
+					      </h:form>   
+						</span>
+				      </header>
           
           <nav id="primary">
             <h:link value="Home" outcome="index"/>
@@ -64,16 +70,22 @@
           </section>      
           
           <section>
-	            <h:form>
-	           <ul class="bundles">
-                    <ui:repeat var="b" value="#{itemController.bundleEntities}">
-                        <li class="item">            
-                                <h:outputText styleClass="title" value="#{b.itemId}" />
-                                <h:outputText styleClass="title" value="#{b.username}" />
-                        </li>  
-                    </ui:repeat>
-                </ul>
-                 </h:form>                
+			<h:form>
+				            	<p:carousel var="bundle" value="#{userController}" rows="10" style="height:250px;">
+				            		<f:facet name="header">  
+								            Top Items
+								    </f:facet>  
+				            		<p:column style="height:150px"> 
+				            			<p:commandLink action="#{itemController.item}">				            				
+								        	<p:graphicImage value="#{topItem.imageUrl}" width="100px" height="150px"/>
+								        	<f:setPropertyActionListener target="#{itemController.selectedItem}" value="#{topItem}" />
+								        </p:commandLink><br/>        
+								  			          
+								        <p:rating value="#{topItem.userRating}" disabled="true"/>   
+								    </p:column> 
+				            			
+				            	</p:carousel>
+			                 </h:form>                             
           </section>    
         
             

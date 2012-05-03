@@ -11,8 +11,14 @@
         <title>Dashboard</title>
         <h:outputStylesheet library="css" name="style.css" type="text/css"/>
         <h:outputStylesheet library="css" name="colorbox.css" type="text/css"/>
-        <h:outputScript library="js" name="jquery.colorbox.js" target="head"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<f:facet name="first">
+		    <h:outputScript library="primefaces" name="jquery/jquery.js"/>
+		    <h:outputScript target="head">
+		        $ = jQuery;
+		    </h:outputScript>
+		</f:facet>
+		<h:outputScript library="js" name="jquery.colorbox.js" target="head"/>
+       	
         <script>        
         $(document).ready(function() {
             var btn = $(".btn");
@@ -23,8 +29,8 @@
           
             btn.click(function(event){
                 event.preventDefault();   
-                login_btn.colorbox({inline:true, width:"30%"});           
-                register_btn.colorbox({inline:true, width:"50%"});   
+                login_btn.colorbox({inline:true, width:"30%", href:"#login_cont"});           
+                register_btn.colorbox({inline:true, width:"50%", href:"#register_cont"});   
             });
         });      
         
@@ -33,15 +39,21 @@
     </h:head>
     <h:body>
         <f:view>
-	    <header>
-	        <h1>Ambience</h1>
-	        <h2>Media Rental App</h2>
-	        <span class="welcome">
-	          Welcome <h:link value="#{userController.user.firstName}" outcome="profile" rendered="#{userController.loggedIn}"/>
-	          <a class="btn login" href="#login_cont">Login</a>
-	          <a class="btn register" href="#register_cont">Register</a>
-	        </span>
-	      </header>
+
+
+					
+					<header>
+				        <h1>Ambience</h1>
+				        <h2>Media Rental App</h2>
+				        <span class="welcome">
+				          Welcome <h:link value=" #{userController.username}" outcome="profile" rendered="#{userController.loggedIn}"/>				          
+				          <h:form>
+				          	<h:link  styleClass="btn login" value="Login" rendered="#{!userController.loggedIn}"/>
+				          	<h:commandLink id="login" styleClass="btn" value="Logout" rendered="#{userController.loggedIn}" action="#{userController.logout}"/>
+				          	<h:link styleClass="btn register" value="Register" rendered="#{!userController.loggedIn}"  />			          	
+					      </h:form>   
+						</span>
+				      </header>
 	      
 	      <nav id="primary">
 	        <h:link value="Home" outcome="index"/>

@@ -16,6 +16,8 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.primefaces.context.RequestContext;
+
 /**
  * @author ilya
  *
@@ -181,6 +183,11 @@ public class ItemController {
 	
 	public String item(){
 		return "item";
+	}
+	
+	public void open() {
+	      RequestContext context = RequestContext.getCurrentInstance();
+	      context.execute("login.show();"); 
 	}
 
 	/**
