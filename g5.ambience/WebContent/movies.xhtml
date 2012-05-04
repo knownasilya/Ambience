@@ -93,38 +93,40 @@
         
             
             <div style='display:none'>
-                <div id='login_cont' style='padding:10px; background:#fff;'>
-                   <p><strong>User Login Form</strong></p>
-                   <h:form id="login_form">
-                        <h:outputLabel value="Username" for="username"></h:outputLabel>
-                        <h:inputText value="#{userController.username}" id="username"></h:inputText><br/>
-                        <h:outputLabel value="Password" for="password"></h:outputLabel>
-                        <h:inputSecret value="#{userController.password}" id="password"/><br/>
-                        <h:commandButton id="login_btn" value="Login" action="#{userController.login}"/> 
-                        <h:message id="error" for="login_btn"/>                 
-                    </h:form>   
-                </div>
-                
-                <div id='register_cont' style='padding:10px; background:#fff;'>
+                	            <div id='login_cont' style='padding:10px; background:#fff;'>
+	               <p><strong>User Login Form</strong></p>
+	               <h:form id="login_form">
+	               		<h:panelGrid columns="2">
+			                <h:outputLabel value="Username" for="username"></h:outputLabel><br/>
+			                <p:inputText value="#{userController.username}" id="username"/><br/>
+			                <h:outputLabel value="Password" for="password"></h:outputLabel><br/>
+			                <p:password value="#{userController.password}" id="password"/><br/>
+			                <h:commandButton id="login_btn" value="Login" action="#{userController.login}"/> 
+			                <p:message id="error" for="login_btn"/>
+		                </h:panelGrid>                 
+		            </h:form>	
+	            </div>
+	            
+	            <div id='register_cont' style='padding:10px; background:#fff;'>
                    <p><strong>Registration Form</strong></p>
                    <h:form id="register_form">
-                        <h:outputLabel value="Username" for="username"/>
-                        <h:inputText value="#{userController.username}" id="username" required="true"/><br/>
+                        <h:outputLabel value="Username" for="username"/><br/>
+                        <p:inputText value="#{userController.username}" id="username" required="true"/><br/>
                         
-                        <h:outputLabel value="Email" for="email"/>
-                        <h:inputText value="#{userController.email}" id="email" required="true"/><br/>
+                        <h:outputLabel value="Email" for="email"/><br/>
+                        <p:inputText value="#{userController.email}" id="email" required="true"/><br/>
                         
-                        <h:outputLabel value="Password" for="password"/>
-                        <h:inputSecret value="#{userController.password}" id="password" required="true"/><br/>
+                        <h:outputLabel value="Password" for="password"/><br/>
+                        <p:password value="#{userController.password}" id="password" required="true"/><br/>
                         
-                        <h:outputLabel value="First Name" for="firstName"/>
-                        <h:inputText value="#{userController.firstName}" id="firstName"/>
+                        <h:outputLabel value="First Name" for="firstName"/><br/>
+                        <p:inputText value="#{userController.firstName}" id="firstName"/><br/>
                         
-                        <h:outputLabel value="Last Name" for="lastName"/>
-                        <h:inputText value="#{userController.lastName}" id="lastName"/><br/>                         
+                        <h:outputLabel value="Last Name" for="lastName"/><br/>
+                        <p:inputText value="#{userController.lastName}" id="lastName"/><br/>                         
                         
                         <h:commandButton id="register_btn" value="Register" action="#{userController.registerUser}"/> 
-                        <h:message id="error" for="register_btn"/>                 
+                        <p:message id="error" for="register_btn"/>                 
                     </h:form>   
                 </div>
             </div>

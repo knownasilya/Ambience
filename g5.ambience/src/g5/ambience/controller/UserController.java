@@ -174,7 +174,7 @@ public class UserController {
 	}
 	
 	public Set<BundleEntity> findUsersBundles(String username){
-		TypedQuery<BundleEntity> query = em.createQuery("SELECT x FROM UserEntity o, BundleEntity x WHERE o.username = :username AND o.username = x.username", BundleEntity.class);
+		TypedQuery<BundleEntity> query = em.createQuery("SELECT x FROM UserEntity o, BundleEntity x WHERE o.userEntity.username = :username AND o.username = x.username", BundleEntity.class);
 		query.setParameter("username", username);
 		return (Set<BundleEntity>)query.getResultList();
 	}

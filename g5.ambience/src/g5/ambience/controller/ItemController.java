@@ -485,7 +485,7 @@ public class ItemController {
 	 * @return the games
 	 */
 	public List<ItemEntity> getGames() {
-		return games;
+		return games = findUniqueItemsByType("Game", 0);
 	}
 
 	/**
