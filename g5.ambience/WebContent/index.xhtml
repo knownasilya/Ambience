@@ -50,7 +50,7 @@
 				        <h1>Ambience</h1>
 				        <h2>Media Rental App</h2>
 				        <span class="welcome">
-				          Welcome <h:link value=" #{userController.username}" outcome="profile" rendered="#{userController.loggedIn}"/>				          
+				          Welcome <h:link value=" #{userController.username}" outcome="#{userController.dashOrProfile}" rendered="#{userController.loggedIn}"/>				          
 				          <h:form>
 				          	<h:link  styleClass="btn login" value="Login" rendered="#{!userController.loggedIn}"/>
 				          	<h:commandLink id="login" styleClass="btn" value="Logout" rendered="#{userController.loggedIn}" action="#{userController.logout}"/>
@@ -123,11 +123,11 @@
 		               <p><strong>User Login Form</strong></p>
 		               <h:form id="login_form">
 			                <h:outputLabel value="Username" for="username"></h:outputLabel>
-			                <h:inputText value="#{userController.username}" id="username"></h:inputText><br/>
+			                <p:inputText value="#{userController.username}" id="username"/><br/>
 			                <h:outputLabel value="Password" for="password"></h:outputLabel>
-			                <h:inputSecret value="#{userController.password}" id="password"/><br/>
+			                <p:password value="#{userController.password}" id="password"/><br/>
 			                <h:commandButton id="login_btn" value="Login" action="#{userController.login}"/> 
-			                <h:message id="error" for="login_btn"/>                 
+			                <p:message id="error" for="login_btn"/>                 
 			            </h:form>	
 		            </div>
 

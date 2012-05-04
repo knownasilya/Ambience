@@ -40,12 +40,12 @@ public class UserController {
 	private String lastName;
 	private String email;
 	private boolean isLoggedIn;
+	private String dashOrProfile;
 	private String loginLogout;
-	//@ManagedProperty(value="#{itemController}")
-	//private ItemController itemController;
 	private ItemEntity item;
 	private UserEntity user;
 	private Set<BundleEntity> bundleEntities;
+	private List<UserEntity> members;
 
 
 	
@@ -112,13 +112,13 @@ public class UserController {
 	public String login(){
 		try{
 			if(getUserByUsernameAndPassword(this.getUsername(), this.getPassword()) != null){
-				System.out.println(password);
-				System.out.println(username);
 				setLoggedIn(true);
 				if(getUserByUsernameAndPassword(this.getUsername(), this.getPassword()).getRole().equals("admin")){
+					setDashOrProfile("dashboard");
 					return "dashboard";
 				} else if(getUserByUsernameAndPassword(this.getUsername(), this.getPassword()).getRole().equals("member")) {
-					return "index"; //just for testing, should be profile
+					setDashOrProfile("profile");
+					return "profile";
 				}
 				
 			} else {				
@@ -128,7 +128,7 @@ public class UserController {
 			}
 		} catch(NullPointerException e) {
 			message("Invalid credentials!", "login_btn");
-			e.getMessage();			
+			System.err.println(e.getMessage());			
 		}
 		return null;
 	}
@@ -137,7 +137,7 @@ public class UserController {
 		if(isLoggedIn){
 			FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		}		
-		return null;
+		return "index";
 	}
 	
 	public void addItemToBundle(ItemEntity item){
@@ -177,6 +177,22 @@ public class UserController {
 		TypedQuery<BundleEntity> query = em.createQuery("SELECT x FROM UserEntity o, BundleEntity x WHERE o.username = :username AND o.username = x.username", BundleEntity.class);
 		query.setParameter("username", username);
 		return (Set<BundleEntity>)query.getResultList();
+	}
+	
+	public ItemEntity getItemFromBundle(BundleEntity bundle){
+		item = bundle.getItemEntity();
+		return item;
+	}
+	
+	public List<UserEntity> findAllMembers(int limit){
+		TypedQuery<UserEntity> query;
+		if(limit > 0){
+			query = em.createQuery("SELECT m FROM UserEntity m WHERE m.role = 'member'", UserEntity.class);
+			query.setMaxResults(limit);
+		} else {
+			query = em.createQuery("SELECT m FROM UserEntity m WHERE m.role = 'member'", UserEntity.class);
+		}
+		return query.getResultList();
 	}
 	
 	
@@ -341,7 +357,7 @@ public class UserController {
 	 * @return the bundleEntities
 	 */
 	public Set<BundleEntity> getBundleEntities() {
-		return bundleEntities;
+		return bundleEntities = findUsersBundles(username);
 	}
 
 
@@ -350,6 +366,38 @@ public class UserController {
 	 */
 	public void setBundleEntities(Set<BundleEntity> bundleEntities) {
 		this.bundleEntities = bundleEntities;
+	}
+
+
+	/**
+	 * @return the members
+	 */
+	public List<UserEntity> getMembers() {
+		return members = findAllMembers(0);
+	}
+
+
+	/**
+	 * @param members the members to set
+	 */
+	public void setMembers(List<UserEntity> members) {
+		this.members = members;
+	}
+
+
+	/**
+	 * @return the dashOrProfile
+	 */
+	public String getDashOrProfile() {
+		return dashOrProfile;
+	}
+
+
+	/**
+	 * @param dashOrProfile the dashOrProfile to set
+	 */
+	public void setDashOrProfile(String dashOrProfile) {
+		this.dashOrProfile = dashOrProfile;
 	}
 
 }

@@ -46,7 +46,7 @@
 				        <h1>Ambience</h1>
 				        <h2>Media Rental App</h2>
 				        <span class="welcome">
-				          Welcome <h:link value=" #{userController.username}" outcome="profile" rendered="#{userController.loggedIn}"/>				          
+				          Welcome <h:link value=" #{userController.username}" outcome="#{userController.dashOrProfile}" rendered="#{userController.loggedIn}" disabled="true"/>				          
 				          <h:form>
 				          	<h:link  styleClass="btn login" value="Login" rendered="#{!userController.loggedIn}"/>
 				          	<h:commandLink id="login" styleClass="btn" value="Logout" rendered="#{userController.loggedIn}" action="#{userController.logout}"/>
@@ -66,6 +66,25 @@
 	      
 	      <section>
 	            <h:form>
+	            	<p:sheet value="#{userController.members}" var="member" scrollHeight="300" >
+	
+						<f:facet name="caption">							
+						List of Members							
+						</f:facet>
+						<p:column headerText="Username" style="width:125px">							 	
+							 <h:inputText value="#{member.username}" />
+						 </p:column>
+							 <p:column headerText="Email" style="width:125px">							 	
+							 <h:inputText value="#{member.email}"/>
+						 </p:column>
+							 <p:column headerText="Name" style="width:125px">							 	
+							 <h:inputText value="#{member.firstName} #{member.lastName}" />
+						 </p:column>							
+						<p:column headerText="Plan" style="width:125px">							
+							<h:inputText value="#{member.membershipPlan}" />							
+						</p:column>
+					</p:sheet>
+	   
 	       
                  </h:form>                
           </section>     

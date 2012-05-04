@@ -70,7 +70,7 @@ public class ItemController {
 			em.persist(item);
 			em.getTransaction().commit();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 		}
 		finally {
 			//blank
@@ -86,7 +86,7 @@ public class ItemController {
 			em.persist(item);
 			em.getTransaction().commit();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 		}
 		finally {
 			//blank
@@ -102,7 +102,7 @@ public class ItemController {
 		} 
 		catch (Exception e) 
 		{
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 		}
 		finally {	
 		}
@@ -117,7 +117,7 @@ public class ItemController {
 		} 
 		catch (Exception e) 
 		{
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 		}
 		finally {	
 		}
@@ -131,7 +131,7 @@ public class ItemController {
 		} 
 		catch (Exception e) 
 		{
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 		}
 		finally {
 		}
@@ -146,7 +146,7 @@ public class ItemController {
 		} 
 		catch (Exception e) 
 		{
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 		}
 		finally {
 		}
@@ -183,11 +183,6 @@ public class ItemController {
 	
 	public String item(){
 		return "item";
-	}
-	
-	public void open() {
-	      RequestContext context = RequestContext.getCurrentInstance();
-	      context.execute("login.show();"); 
 	}
 
 	/**

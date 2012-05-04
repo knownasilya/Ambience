@@ -45,7 +45,7 @@
 				        <h1>Ambience</h1>
 				        <h2>Media Rental App</h2>
 				        <span class="welcome">
-				          Welcome <h:link value=" #{userController.username}" outcome="profile" rendered="#{userController.loggedIn}"/>				          
+				          Welcome <h:link value=" #{userController.username}" outcome="#{userController.dashOrProfile}" rendered="#{userController.loggedIn}"/>				          
 				          <h:form>
 				          	<h:link  styleClass="btn login" value="Login" rendered="#{!userController.loggedIn}"/>
 				          	<h:commandLink id="login" styleClass="btn" value="Logout" rendered="#{userController.loggedIn}" action="#{userController.logout}"/>
