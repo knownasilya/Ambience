@@ -41,10 +41,6 @@
     <h:body>
         <f:view>
 
-	      
-	      <p:layout fullPage="true">
-	
-				<p:layoutUnit position="north" size="150">
 					
 					<header>
 				        <h1>Ambience</h1>
@@ -59,19 +55,16 @@
 						</span>
 				      </header>
 				      
-				      <nav id="primary">
-				        <a href="#">Home</a>
-				        <h:link value="Movies" outcome="movies"/>
-				        <a href="#">Games</a>
-				        <a href="#">Membership</a>
-				        <a href="#">Register</a>
-				        <a href="#">About</a>       
-				      </nav> 
+		          <nav id="primary">
+		            <h:link value="Home" outcome="index"/>
+		            <h:link value="Movies" outcome="movies"/>
+		            <h:link value="Games" outcome="games"/>
+		            <a href="#">Membership</a>
+		            <a href="#">Register</a>
+		            <a href="#">About</a>       
+		          </nav>   
 
-					
-				</p:layoutUnit>
-					
-				<p:layoutUnit position="center" style="margin:0 auto">
+
 					
 					<section class="main">
 				            <h:form>
@@ -94,11 +87,11 @@
 			          
 			          <section class="main">
 				            <h:form>
-				            	<p:carousel var="game" value="#{itemController.games}" rows="10" style="height:250px;">
+				            	<p:carousel var="game" value="#{itemController.games}" rows="10" style="height:200px;">
 				            		<f:facet name="header">  
 								            Games
 								    </f:facet>  
-				            		<h:panelGrid columns="1" style="width:100%; height:250px" cellpadding="5">   
+				            		<h:panelGrid columns="1" style="width:100%; height:200px" cellpadding="5">   
 				            			<p:commandLink action="#{itemController.item}">				          
 								        	<p:graphicImage value="#{game.imageUrl}" width="100px" height="150px"/>
 								        	<f:setPropertyActionListener target="#{itemController.selectedItem}" value="#{game}" />
@@ -111,10 +104,6 @@
 			                 </h:form>                
 			          </section> 
 				
-					
-				</p:layoutUnit>
-			</p:layout>
-	      
 	      
         
 	        

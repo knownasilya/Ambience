@@ -56,7 +56,7 @@
           
           <nav id="primary">
             <h:link value="Home" outcome="index"/>
-            <a href="#">Movies</a>
+            <h:link value="Movies" outcome="movies"/>
             <h:link value="Games" outcome="games"/>
             <a href="#">Membership</a>
             <a href="#">Register</a>
@@ -82,6 +82,8 @@
 					                    	<p:graphicImage value="#{movie.imageUrl}" width="150px"/>
 					                    </p:commandLink>  				                  
 					                    <h:outputText value="#{movie.director}" />  
+					              		<h:outputText value="#{movie.platform}" />
+					                    <h:outputText value="#{movie.genre}" /> 
 					                </h:panelGrid>  
 					            </p:panel>  
 					        </p:column>  

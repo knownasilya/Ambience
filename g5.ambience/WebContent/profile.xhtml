@@ -57,12 +57,34 @@
           
           <nav id="primary">
             <h:link value="Home" outcome="index"/>
-            <a href="#">Movies</a>
-            <a href="#">Games</a>
+            <h:link value="Movies" outcome="movies"/>
+            <h:link value="Games" outcome="games"/>
             <a href="#">Membership</a>
             <a href="#">Register</a>
             <a href="#">About</a>       
-          </nav>
+          </nav>  
+          
+           <section class="right">
+          	<h:form id="update_form">
+                        <h:outputLabel value="Username" for="username"/><br/>
+                        <p:inputText value="#{userController.username}" id="username" required="true"/><br/>
+                        
+                        <h:outputLabel value="Email" for="email"/><br/>
+                        <p:inputText value="#{userController.user.email}" id="email" required="true"/><br/>
+                        
+                        <h:outputLabel value="Password" for="password"/><br/>
+                        <p:password value="#{userController.password}" id="password" required="true"/><br/>
+                        
+                        <h:outputLabel value="First Name" for="firstName"/><br/>
+                        <p:inputText value="#{userController.user.firstName}" id="firstName"/><br/>
+                        
+                        <h:outputLabel value="Last Name" for="lastName"/><br/>
+                        <p:inputText value="#{userController.user.lastName}" id="lastName"/><br/>                         
+                        
+                        <h:commandButton id="register_btn" value="Update" action="#{userController.update}"/> 
+                        <p:message id="error" for="register_btn"/>                 
+            </h:form>   
+          </section>  
           
           <section>
 			<h:form>
@@ -82,7 +104,9 @@
 	            	</p:carousel>
 
             </h:form>                             
-          </section>    
+          </section>  
+          
+         
         
             
             <div style='display:none'>

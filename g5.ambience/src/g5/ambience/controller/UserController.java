@@ -44,7 +44,7 @@ public class UserController {
 	private String loginLogout;
 	private ItemEntity item;
 	private UserEntity user;
-	private Set<BundleEntity> bundleEntities;
+	private List<BundleEntity> bundleEntities;
 	private List<UserEntity> members;
 
 
@@ -104,14 +104,38 @@ public class UserController {
 		}
 	}
 	
+	private void updateUser(String username, String password, String email, String firstName, String lastName, String role){
+		try {
+			String hash = null;			
+			hash = Auth.hash_password(password);
+			 
+			UserEntity user = new UserEntity(username, hash, email, firstName, lastName, role);
+			em.getTransaction().begin();
+			em.merge(user);
+			em.flush();
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			//blank
+		}
+	}
+	
 	public String registerUser(){
 		createUser(this.getUsername(), this.getPassword(), this.getEmail(), this.getFirstName(), this.getLastName(), "member");
+		return "profile";
+	}
+	
+	public String update(){
+		updateUser(this.getUsername(), this.getPassword(), this.getEmail(), this.getFirstName(), this.getLastName(), "member");
 		return "profile";
 	}
 	
 	public String login(){
 		try{
 			if(getUserByUsernameAndPassword(this.getUsername(), this.getPassword()) != null){
+				user = getUserByUsernameAndPassword(this.username, this.password);
 				setLoggedIn(true);
 				if(getUserByUsernameAndPassword(this.getUsername(), this.getPassword()).getRole().equals("admin")){
 					setDashOrProfile("dashboard");
@@ -173,10 +197,10 @@ public class UserController {
 		return null;
 	}
 	
-	public Set<BundleEntity> findUsersBundles(String username){
-		TypedQuery<BundleEntity> query = em.createQuery("SELECT x FROM UserEntity o, BundleEntity x WHERE o.userEntity.username = :username AND o.username = x.username", BundleEntity.class);
+	public List<BundleEntity> findUsersBundles(String username){
+		TypedQuery<BundleEntity> query = em.createQuery("SELECT x FROM UserEntity o, BundleEntity x WHERE o.username = :username AND x.userEntity = o", BundleEntity.class);
 		query.setParameter("username", username);
-		return (Set<BundleEntity>)query.getResultList();
+		return query.getResultList();
 	}
 	
 	public ItemEntity getItemFromBundle(BundleEntity bundle){
@@ -356,7 +380,7 @@ public class UserController {
 	/**
 	 * @return the bundleEntities
 	 */
-	public Set<BundleEntity> getBundleEntities() {
+	public List<BundleEntity> getBundleEntities() {
 		return bundleEntities = findUsersBundles(username);
 	}
 
@@ -364,7 +388,7 @@ public class UserController {
 	/**
 	 * @param bundleEntities the bundleEntities to set
 	 */
-	public void setBundleEntities(Set<BundleEntity> bundleEntities) {
+	public void setBundleEntities(List<BundleEntity> bundleEntities) {
 		this.bundleEntities = bundleEntities;
 	}
 
