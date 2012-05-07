@@ -88,17 +88,17 @@
           
           <section>
 			<h:form>
-					<p:carousel var="bundle" value="#{userController.bundleEntities}" rows="3">
+					<p:carousel var="bundleItem" value="#{userController.bundleItems}" rows="3">
 				            		<f:facet name="header">  
 								            Bundles
 								    </f:facet>  
 				            		<h:panelGrid columns="1" style="width:100%; height:250px" cellpadding="5">   
 				            			<p:commandLink action="#{itemController.item}">
-				            				<f:param name="selectedItem" value="#{bundle.itemEntity}"/>
-								        	<p:graphicImage value="#{bundle.itemEntity.imageUrl}" width="100px"/>
+				            				<f:param name="selectedItem" value="#{bundleItem}"/>
+								        	<p:graphicImage value="#{bundleItem.imageUrl}" width="100px"/>
 								        </p:commandLink> 	          
 								  			          
-								        <p:rating value="#{bundle.itemEntity.userRating}" disabled="true"/>   
+								        <p:rating value="#{bundleItem.userRating}" disabled="true"/>   
 								    </h:panelGrid>  
 				            			
 	            	</p:carousel>

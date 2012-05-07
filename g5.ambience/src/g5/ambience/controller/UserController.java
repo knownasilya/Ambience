@@ -46,6 +46,7 @@ public class UserController {
 	private UserEntity user;
 	private List<BundleEntity> bundleEntities;
 	private List<UserEntity> members;
+	private List<ItemEntity> bundleItems;
 
 
 	
@@ -197,8 +198,8 @@ public class UserController {
 		return null;
 	}
 	
-	public List<BundleEntity> findUsersBundles(String username){
-		TypedQuery<BundleEntity> query = em.createQuery("SELECT x FROM UserEntity o, BundleEntity x WHERE o.username = :username AND x.userEntity = o", BundleEntity.class);
+	public List<ItemEntity> findUsersBundleItems(String username){
+		TypedQuery<ItemEntity> query = em.createQuery("SELECT i FROM UserEntity o, BundleEntity x, ItemEntity i WHERE o.username = :username AND x.userEntity = o AND x.itemEntity = i", ItemEntity.class);
 		query.setParameter("username", username);
 		return query.getResultList();
 	}
@@ -207,7 +208,16 @@ public class UserController {
 		item = bundle.getItemEntity();
 		return item;
 	}
-	
+	/*
+	public void removeItemFromBundle(ItemEntity item){
+		try {
+			em.getTransaction().begin();
+			item = em.find
+		} finally {
+			
+		}
+	}
+	*/
 	public List<UserEntity> findAllMembers(int limit){
 		TypedQuery<UserEntity> query;
 		if(limit > 0){
@@ -378,22 +388,6 @@ public class UserController {
 
 
 	/**
-	 * @return the bundleEntities
-	 */
-	public List<BundleEntity> getBundleEntities() {
-		return bundleEntities = findUsersBundles(username);
-	}
-
-
-	/**
-	 * @param bundleEntities the bundleEntities to set
-	 */
-	public void setBundleEntities(List<BundleEntity> bundleEntities) {
-		this.bundleEntities = bundleEntities;
-	}
-
-
-	/**
 	 * @return the members
 	 */
 	public List<UserEntity> getMembers() {
@@ -422,6 +416,22 @@ public class UserController {
 	 */
 	public void setDashOrProfile(String dashOrProfile) {
 		this.dashOrProfile = dashOrProfile;
+	}
+
+
+	/**
+	 * @return the bundleItems
+	 */
+	public List<ItemEntity> getBundleItems() {
+		return bundleItems = findUsersBundleItems(username);
+	}
+
+
+	/**
+	 * @param bundleItems the bundleItems to set
+	 */
+	public void setBundleItems(List<ItemEntity> bundleItems) {
+		this.bundleItems = bundleItems;
 	}
 
 }
